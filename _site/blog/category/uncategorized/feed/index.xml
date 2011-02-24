@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+     >
+  <channel>
+    <title>rafekettler.com</title>
+    <link>http://www.rafekettler.com/blog</link>
+    <description>My thoughts on programming and technology</description>
+    <pubDate>Thu, 24 Feb 2011 21:49:55 GMT</pubDate>
+    <generator>Blogofile</generator>
+    <sy:updatePeriod>hourly</sy:updatePeriod>
+    <sy:updateFrequency>1</sy:updateFrequency>
+    <item>
+      <title>C resources that helped me</title>
+      <link>http://www.rafekettler.com/blog/2011/02/18/c-resources-that-helped-me</link>
+      <pubDate>Fri, 18 Feb 2011 04:17:37 EST</pubDate>
+      <category><![CDATA[Uncategorized]]></category>
+      <guid>http://rafekettler.com/?p=301</guid>
+      <description>C resources that helped me</description>
+      <content:encoded><![CDATA[<p>I've been picking up C a bit more lately, and it's been great so far. Along the way, I've picked up some great articles, books, and sites. I thought I'd post them for posterity and the convenience of anyone who might happen on this.</p>
+<ul>
+<li><a href="http://cslibrary.stanford.edu/101/EssentialC.pdf">The Essential C, by Nick Parlante</a> -- This is really a must for anyone who wants to relearn C or an experienced programmer who want a primer. It's only 50 pages, and it's quick and to the point. It's something that you could read and comprehend in a day if you wanted to. It's also very thorough -- most of the major language concepts see some coverage.</li>
+<li><a href="http://www.amazon.com/Programming-Language-2nd-Brian-Kernighan/dp/0131103628">K&amp;R C, by Kernighan and Ritchie</a> -- no C programmer would be complete without it. If you have to ask, you shouldn't be using C.</li>
+<li><a href="http://c-faq.com/">comp.lang.c FAQ</a> -- it's a great FAQ. Quite thorough. Even if you don't have a specific question, it's very educational to peruse: you can pick up nice bits and pieces of advice along the way.</li>
+<li><a href="http://www.jetcafe.org/jim/highlowc.html">High and Low Level C by Jim Larson</a> -- sort of a guide to doing things in C that it wasn't really designed to do (closures, classes, GC), and sort of a guide to low level hacks. It's a good overview of some cool hacks in C that can come in handy for the advanced C coder.</li>
+<li><a href="http://www.open-std.org/JTC1/SC22/WG14/">The ISO C standard</a> -- again, if you have to ask...</li>
+<li><a href="http://gcc.gnu.org/onlinedocs/gcc-4.5.2/gcc.pdf">The GCC manual</a> -- everyone's favorite C compiler has quite a few options and quite a few associated tricks. Also, GNU C is, in many ways, a superset of C itself -- it allows a number of things that the standard does not (like nested functions). It's nice to know what those features are.</li>
+<li><a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/developers-handbook/secure.html">The FreeBSD handbook's section on secure programming</a> -- programming in C, especially with strings, can be dangerous. This is the most comprehensive guide to programming securely that I've found so far.</li>
+</ul>
+<p>If I come across any other good resources, I'll add them.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Magic Methods Guide is Complete</title>
+      <link>http://www.rafekettler.com/blog/2011/01/24/magic-methods-guide-is-complete</link>
+      <pubDate>Mon, 24 Jan 2011 23:26:57 EST</pubDate>
+      <category><![CDATA[Uncategorized]]></category>
+      <guid>http://rafekettler.com/?p=270</guid>
+      <description>Magic Methods Guide is Complete</description>
+      <content:encoded><![CDATA[<p>It's finally done (feature-complete, I mean). It still may have errors, but it works. Check it out <a href="http://www.rafekettler.com/magicmethods.html">here</a>.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>The magic methods guide now has a github repo</title>
+      <link>http://www.rafekettler.com/blog/2011/01/20/the-magic-methods-guide-now-has-a-github-repo</link>
+      <pubDate>Thu, 20 Jan 2011 04:56:35 EST</pubDate>
+      <category><![CDATA[Uncategorized]]></category>
+      <guid>http://rafekettler.com/?p=264</guid>
+      <description>The magic methods guide now has a github repo</description>
+      <content:encoded><![CDATA[<p>Check out the github repo for the magic methods guide at http://www.github.com/RafeKettler/magicmethods. Maybe you could even try and find an issue?</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Magic Method Monday: custom attribute access</title>
+      <link>http://www.rafekettler.com/blog/2010/12/06/magic-method-monday-custom-attribute-access</link>
+      <pubDate>Mon, 06 Dec 2010 17:29:03 EST</pubDate>
+      <category><![CDATA[Uncategorized]]></category>
+      <guid>http://rafekettler.com/?p=154</guid>
+      <description>Magic Method Monday: custom attribute access</description>
+      <content:encoded><![CDATA[<p>We've been a long way through Magic Method Monday, and now it's time to get to some of the more advance magic methods. Today, it's <code>__getattr__</code>, <code>__setattr__</code>, <code>__delattr__</code>, and <code>__getattribute__</code>.</p>
+<p><code>__getattr__</code></p>
+<p><code>__getattr__</code> defines behavior when an attribute that doesn't exist (either yet or at all) is accessed. It takes the arguments <code>self</code> and <code>name</code>, where <code>name</code> is the name of the attribute that is being accessed. It's essentially a way to define behavior for "attribute not found", and according to the documentation, it can go two ways: either compute an attribute, or raise an AttributeError.</p>
+<p><code>__setattr__</code></p>
+<p><code>__setattr__</code>, though it may seem related to <code>__getattr__</code>, behaves very differently. <code>__setattr__</code> defines behavior whenever an attribute of a class is assigned to. It takes the arguments <code>self</code>, <code>name</code> where <code>name</code> is the name of the attribute, and <code>value</code>. Note that some special behavior must be taken when defining <code>__setattr__</code>:</p>
+<div class="pygments_tango"><pre><span class="c"># wrong way to use __setattr__</span>
+<span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="c"># since every time an attribute is assigned, __setattr__() is called, this</span>
+    <span class="c"># is recursion.</span>
+    <span class="c"># so this really means self.__setattr__(name, value). Since the method</span>
+    <span class="c"># keeps calling itself, the recursion goes on forever causing a crash</span>
+
+<p><span class="c"># the right way to do it</span>
+<span class="k">def</span> <span class="nf"><strong>setattr</strong></span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n"><strong>dict</strong></span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span> <span class="c"># assigning to the dict of names in the class</span>
+    <span class="c"># define custom behavior here</span>
+</pre></div></p>
+<p><code>__delattr__</code></p>
+<p>You should already know what it does. <code>__delattr__</code> takes arguments <code>self</code> and <code>name</code> and defines custom behavior for when an attribute is deleted.</p>
+<p><code>__getattribute__</code></p>
+<p>You want to define behavior for every time a function is accessed? Well, you're in luck. You can use this (only in new-style classes, mind you, which you can get by placing <code>__metaclass__ = type</code> at the top of the script, or by subclassing <code>object</code> or another new-style class). It takes arguments <code>self</code> and <code>name</code>, and it can be quite useful (though it must be used with care, as it can also cause infinite recursion).  It's best that you read <a href="http://docs.python.org/reference/datamodel.html#object.__getattribute__">the documentation for <strong>getattribute</strong>()</a> yourself to get an idea of what to do and what not to do.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Hello world!</title>
+      <link>http://www.rafekettler.com/blog/2010/08/09/hello-world</link>
+      <pubDate>Mon, 09 Aug 2010 21:33:26 EDT</pubDate>
+      <category><![CDATA[Uncategorized]]></category>
+      <guid>http://rafekettler.com/?p=1</guid>
+      <description>Hello world!</description>
+      <content:encoded><![CDATA[<p>I'm hard at work getting the blog up and running. Thanks for the patience.</p>
+<div class="pygments_tango"><pre><span class="k">print</span> <span class="s">&quot;Hello world!&quot;</span>
+</pre></div>]]></content:encoded>
+    </item>
+  </channel>
+</rss>

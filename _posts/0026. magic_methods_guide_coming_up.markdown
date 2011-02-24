@@ -1,0 +1,12 @@
+---
+categories: Magic Method Monday
+date: 2011/01/01 18:03:03
+guid: http://rafekettler.com/?p=233
+tags: Magic-Method-Monday
+title: Magic Methods Guide, Coming Up
+---
+Soon enough, I'll be creating an organized guide to Python's magic methods that will be more or less an aggregation of my blog posts on the matter, perhaps with a few more examples.
+
+I'll at least make it available in HTML and PDF format, but I'm not sure where (I'm leaning towards creating a new subdomain to host it, but who knows). It will definitely be available from my blog, I'm just not sure if I want to jump through WordPress hoops to make the static content work right. I may just end up using plain HTML with a little embellishment (it'll also give me a great chance to use GeSHi manually, if I so choose).
+
+Keep on the lookout for it, it should be coming in the next month or so (I have a few more weeks of Magic Method Monday blog posts before I run out of methods to cover, though I'll probably start on the guide before then).

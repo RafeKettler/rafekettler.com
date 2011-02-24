@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+     >
+  <channel>
+    <title>rafekettler.com</title>
+    <link>http://www.rafekettler.com/blog</link>
+    <description>My thoughts on programming and technology</description>
+    <pubDate>Thu, 24 Feb 2011 21:49:55 GMT</pubDate>
+    <generator>Blogofile</generator>
+    <sy:updatePeriod>hourly</sy:updatePeriod>
+    <sy:updateFrequency>1</sy:updateFrequency>
+    <item>
+      <title>Why PHP Throws Me</title>
+      <link>http://www.rafekettler.com/blog/2010/12/15/why-php-throws-me</link>
+      <pubDate>Wed, 15 Dec 2010 17:52:08 EST</pubDate>
+      <category><![CDATA[PHP]]></category>
+      <category><![CDATA[Programming]]></category>
+      <guid>http://rafekettler.com/?p=179</guid>
+      <description>Why PHP Throws Me</description>
+      <content:encoded><![CDATA[<p>After learning PHP for a few weeks, it was very disorienting. It had no right to be -- I'm familiar with C-style syntax and I program in dynamically typed, interpreted languages all the time (though the $ sigils before variables make me a bit dizzy). All the syntax -- functions, classes, control flow -- either remind me of C, Java, or Python. The thing that throws most people -- the <em>wild</em> inconsistency in naming conventions -- confuses me a bit, but I've basically gotten over it. Even the lack of a real sense of scope (I don't have to do anything to use a MySQL function, I just use it, same with the rest of the standard library, AFAIK) was possible to overcome.</p>
+<p>I figured out what really bothers me about it --  it subverts my expectations for programming style. I'm used to doing some things with objects and others procedurally. PHP doesn't -- it seems like many things are procedural when they have no right to be, and it makes the language look like a mess.</p>
+<p>I think the design choice that Python really got right (along with a few other languages) is making some basic types as well as much of the standard library object-oriented. Where Python has list methods, PHP has 50+ functions that operate on arrays procedurally. What is <code>last_elem = some_list.pop()</code> in Python becomes <code>$last_elem = array_pop($some_list)</code> in PHP. My preference towards the Python style is probably just my upbringing -- but I don't see why, in a dynamically-typed language, I have to constantly type <code>array_this()</code> and <code>array_that()</code> to operate on arrays.</p>
+<p>I suppose this has its roots in PHP's heritage -- it didn't start out object-oriented, so in an attempt to not break compatibility, the procedural relics were kept. But even as much as I admonish "There's More Than One Way To Do It", you'd think by now they'd have at least made it so you could operate on strings and arrays using methods. This is why I like where PHP 5 is going (or has been going) -- things that for really no good reason used to be procedural are now object-oriented. When working with the <code>mysql</code> extension, I feel like I'm programming in C, passing around an object from function to function (except in some cases, this can be implicit, which also irks me). But <code>mysqli</code> fixes that, making things, at least in my opinion, far more natural (and less cluttered with <code>mysql_this()</code> and <code>mysql_that()</code>). Take these examples:</p>
+<div class="pygments_tango"><pre><span class="cp">&lt;?php</span>
+
+<p><span class="c1">// Connecting to a MySQL DB the procedural way</span>
+<span class="nv">$host</span> <span class="o">=</span> <span class="s1">&#39;somehost&#39;</span><span class="p">;</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="s1">&#39;user&#39;</span><span class="p">;</span>
+<span class="nv">$pass</span> <span class="o">=</span> <span class="s1">&#39;password&#39;</span><span class="p">;</span>
+<span class="nv">$db</span> <span class="o">=</span> <span class="s1">&#39;somedb&#39;</span><span class="p">;</span></p>
+<p><span class="nv">$connection</span> <span class="o">=</span> <span class="nb">mysql_connect</span><span class="p">(</span><span class="nv">$host</span><span class="p">,</span> <span class="nv">$user</span><span class="p">,</span> <span class="nv">$pass</span><span class="p">);</span>
+<span class="nb">mysql_select_db</span><span class="p">(</span><span class="nv">$db</span><span class="p">);</span> <span class="c1">// With no second argument, PHP just infers that I&#39;m using $connection</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nb">mysql_query</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM symbols&#39;</span><span class="p">);</span> <span class="c1">// again, PHP just assumes it&#39;s $connection</span>
+<span class="cm">/<em> Now I pass $result to a billion functions to do something with it. All in all, it&#39;s really inconsistent</span>
+<span class="cm">and counter intuitive for anyone who realizes that connections are best represented as objects </em>/</span></p>
+<p><span class="nb">mysql_close</span><span class="p">(</span><span class="nv">$connection</span><span class="p">);</span> <span class="c1">// The last nail in the coffin</span></p>
+<p><span class="cp">?&gt;</span><span class="x"></span>
+</pre></div></p>
+<p>Compare this to using <code>mysqli</code>:</p>
+<?php
+// Using a MySQL DB, the OO way
+
+<p>$connection = new mysqli($host, $user, $pass, $db); // Simple object construction
+$result = $connection-&gt;query('SELECT * FROM SYMBOLS');
+/<em> Now we use $result as an object, too! How about that. No ambiguity, no repetition, just
+beautiful, object-oriented code. </em>/
+$connection-&gt;close();
+?&gt;
+$$/code</p>
+<p>I hope that at some point PHP breaks compatibility to do what <code>mysqli</code> did to <code>mysql</code> for the rest of the language. Some things deserve to be objects, and a lot of the problems of PHP can be fixed in the process (inconsistent naming, excessive verbosity, ambiguity). Maybe I'm just trying to code Python in PHP, but that wouldn't be so bad, would it?</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Other languages have magic methods?!?</title>
+      <link>http://www.rafekettler.com/blog/2010/12/04/other-languages-have-magic-methods</link>
+      <pubDate>Sat, 04 Dec 2010 18:26:02 EST</pubDate>
+      <category><![CDATA[Python]]></category>
+      <category><![CDATA[PHP]]></category>
+      <category><![CDATA[Programming]]></category>
+      <guid>http://rafekettler.com/?p=127</guid>
+      <description>Other languages have magic methods?!?</description>
+      <content:encoded><![CDATA[<p>I've been teaching myself PHP and I've discovered that PHP uses magic methods, like Python. I have mixed feelings about this: I like that PHP uses the awesomeness that is magic methods, and I like that they took hints from Python<sup>[<a name="id394062" href="#ftn.id394062">1</a>]</sup> (I did some research, and PHP's magic methods only came in PHP 3, circa 1998, whereas Python has had magic methods since before 1.0). I don't, however, like that their magic methods start with two underscores but have no trailing underscores (this will conflict with some of the naming practices that I'm used to, but I'm sure it won't be a problem in a language with true visibility control), and that they have different names than their Python counterparts.</p>
+<p>So, for my convenience and the convenience of other Pythonistas that find they must use PHP (not the worst fate, but not as clean as I'm used to), I've written up some PHP magic methods and their Python equivalents for easy reference. For actual reference, you can actually go to the <a href="http://us3.php.net/manual/en/language.oop5.php">PHP manual's pages on classes</a> and look at how they describe them.</p>
+<ul>
+<li><code>__construct</code> translates to <code>__init__</code></li>
+<li><code>__destruct</code> translates (roughly) to <code>__del__</code>, since it gets called when an object gets deleted, though I haven't learned yet how to explicitly delete a PHP object</li>
+<li><code>__call</code> doesn't have a direct equivalent. It defines some standard behavior when a method is called. It can be emulated with <code>__getattr__</code> (see <a href="http://stackoverflow.com/questions/1626478/python-getattribute-or-getattr-to-emulate-php-call">this</a> for how), but I don't see why it would be needed. Similar behavior can be achieved with decorators (in a more explicit and deliberate manner, too).</li>
+<li><code>__callStatic</code> is the same story, it's like <code>__call</code> but it gets invoked when a method is called in a static context.</li>
+<li><code>__get</code> and <code>__set</code> are similar to Python's <code>property()</code> function, in that they allow you to define behavior for attribute access.</li>
+<li><code>__toStr</code> is equivalent to <code>__str__</code></li>
+<li><code>__invoke</code> is equivalent to <code>__call__</code></li>
+</ul>
+<p>Sadly, PHP doesn't readily support a lot of the stuff that makes classes so cool and so powerful in Python. In Python, operator overloading is as simple as defining <code>__add__</code> or <code>__eq__</code>, but PHP doesn't let you do this. It's also not really possible to make classes behave as types, like we know and cherish in Python.</p>
+<p>As for a brief review on my journey into PHP so far: for someone coming from a Java/Python background, it's very easy to learn. Very few things have confused/surprised me so far (except for the inconsistent/nonsense naming of functions and methods). The main advantage of PHP, IMO, is convenience: it's always there, without having to use CGI or a framework it's web-ready, which is good for a lot of things, particularly small tasks.</p>
+<div class="footnote"><sup>[<a name="ftn.id394062" href="#id394062">1</a>]</sup>
+This is a conceited statement coming from a Python ultranationalist. I know Python had magic methods way before PHP, but I can't be certain that's where PHP got it from (Python may have gotten magic methods from somewhere else), or that Rasmus Lerdorf didn't just come up with the idea himself (though that's doubtful)</div>]]></content:encoded>
+    </item>
+  </channel>
+</rss>

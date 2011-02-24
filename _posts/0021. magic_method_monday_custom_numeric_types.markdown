@@ -1,0 +1,89 @@
+---
+categories: Magic Method Monday, Python, Programming
+date: 2010/12/20 05:19:54
+guid: http://rafekettler.com/?p=176
+tags: Python links, Magic-Method-Monday, OOP, programming
+title: 'Magic Method Monday: Custom Numeric Types'
+---
+I've been dreading doing this MMM for a while, but it's worth it. Python magic methods can do just about anything; make sequences that behave like language constructs, make descriptors, even make comparisons using operators like `==`. Most of you have already figured out that there's a way to make classes defined by the programmer feel and work like basic numeric types. It just so happens that there's about 40 magic methods for this. Here we go:
+
+<table>
+<tr><td><strong>Magic Method</strong></td><td><strong>Arguments</strong></td><td><strong>Description</strong></td></tr>
+<tr><td><code>__add__</code></td><td>self, other</td><td>Emulates addition(<code>self + other</code>)</td></tr>
+<tr><td><code>__sub__</code></td><td>self, other</td><td>Emulates subtraction (<code>self - other</code>)</td></tr>
+<tr><td><code>__mul__</code></td><td>self, other</td><td>Emulates multiplication (<code>self * other</code>)</td></tr>
+<tr><td><code>__floordiv__</code></td><td>self, other</td><td>Emulates integer division (<code>self // other</code>)</td></tr>
+<tr><td><code>__div__</code></td><td>self, other</td><td>Emulates division (<code>self / other</code>)</td></tr>
+<tr><td><code>__truediv__</code></td><td>self, other</td><td>Emulates division (<code>self / other</code>) when <code>from __future__ import division</code> is in effect</td></tr>
+<tr><td><code>__mod__</code></td><td>self, other</td><td>Emulates modulo (<code>self % other</code>)</td></tr>
+<tr><td><code>__divmod__</code></td><td>self, other</td><td>Emulates long division (<code>divmod(self, other)</code>)</td></tr>
+<tr><td><code>__pow__</code></td><td>self, other</td><td>Emulates exponent (<code>self**other</code>)</td></tr>
+<tr><td><code>__lshift__</code></td><td>self, other</td><td>Emulates left bitwise shift (<code>self << other</code>)</td></tr>
+<tr><td><code>__rshift__</code></td><td>self, other</td><td>Emulates right bitwise shift (<code>self >> other</code>)</td></tr>
+<tr><td><code>__and__</code></td><td>self, other</td><td>Emulates bitwise and (<code>self & other</code>)</td></tr>
+<tr><td><code>__or__</code></td><td>self, other</td><td>Emulates bitwise or (<code>self | other</code>)</td></tr>
+<tr><td><code>__xor__</code></td><td>self, other</td><td>Emulates bitwise xor (<code>self ^ other</code>)</td></tr>
+</table>
+
+That's it for the "normal" operators. But there's more; each one of these has a version for a reflected operand (e.g. `x - my_class`, where the primary operand is `x`, not `my_instance`). These only get called when `x` does not support the attempted operation and `x` and `my_instance` are of different types.
+
+<table>
+<tr><td><strong>Magic Method</strong></td><td><strong>Arguments</strong></td><td><strong>Description</strong></td></tr>
+<tr><td><code>__radd__</code></td><td>self, other</td><td>Emulates reflected addition(<code>other + self</code>)</td></tr>
+<tr><td><code>__rsub__</code></td><td>self, other</td><td>Emulates reflected subtraction (<code>other - self</code>)</td></tr>
+<tr><td><code>__rmul__</code></td><td>self, other</td><td>Emulates reflected multiplication (<code>other * self</code>)</td></tr>
+<tr><td><code>__rfloordiv__</code></td><td>self, other</td><td>Emulates reflected integer division (<code>other // self</code>)</td></tr>
+<tr><td><code>__rdiv__</code></td><td>self, other</td><td>Emulates reflected division (<code>other / self</code>)</td></tr>
+<tr><td><code>__rtruediv__</code></td><td>self, other</td><td>Emulates reflected division (<code>other / self</code>) when <code>from __future__ import division</code> is in effect</td></tr>
+<tr><td><code>__rmod__</code></td><td>self, other</td><td>Emulates reflected modulo (<code>other % self</code>)</td></tr>
+<tr><td><code>__rdivmod__</code></td><td>self, other</td><td>Emulates reflected long division (<code>divmod(other, self)</code>)</td></tr>
+<tr><td><code>__rpow__</code></td><td>self, other</td><td>Emulates reflected exponent (<code>other**self</code>)</td></tr>
+<tr><td><code>__rlshift__</code></td><td>self, other</td><td>Emulates reflected left bitwise shift (<code>other << self</code>)</td></tr>
+<tr><td><code>__rrshift__</code></td><td>self, other</td><td>Emulates reflected right bitwise shift (<code>other >> self</code>)</td></tr>
+<tr><td><code>__rand__</code></td><td>self, other</td><td>Emulates reflected bitwise and (<code>other & self</code>)</td></tr>
+<tr><td><code>__ror__</code></td><td>self, other</td><td>Emulates reflected bitwise or (<code>other | self</code>)</td></tr>
+<tr><td><code>__rxor__</code></td><td>self, other</td><td>Emulates reflected bitwise xor (<code>other ^ self</code>)</td></tr>
+</table>
+
+And then, there's more. Each normal magic method has a version for augmented assignment (e.g. `my_instance += x`).
+
+<table>
+<tr><td><strong>Magic Method</strong></td><td><strong>Arguments</strong></td><td><strong>Description</strong></td></tr>
+<tr><td><code>__iadd__</code></td><td>self, other</td><td>Emulates augmented assignment with addition(<code>self += other</code>)</td></tr>
+<tr><td><code>__isub__</code></td><td>self, other</td><td>Emulates augmented assignment with subtraction (<code>self -= other</code>)</td></tr>
+<tr><td><code>__imul__</code></td><td>self, other</td><td>Emulates augmented assignment with multiplication (<code>self *= other</code>)</td></tr>
+<tr><td><code>__ifloordiv__</code></td><td>self, other</td><td>Emulates augmented assignment with integer division (<code>self //= other</code>)</td></tr>
+<tr><td><code>__idiv__</code></td><td>self, other</td><td>Emulates augmented assignment with division (<code>self /= other</code>)</td></tr>
+<tr><td><code>__itruediv__</code></td><td>self, other</td><td>Emulates augmented assignment with division (<code>self /= other</code>) when <code>from __future__ import division</code> is in effect</td></tr>
+<tr><td><code>__imod__</code></td><td>self, other</td><td>Emulates augmented assignment with modulo (<code>self %= other</code>)</td></tr>
+<tr><td><code>__ipow__</code></td><td>self, other</td><td>Emulates augmented assignment with exponent (<code>self **= other</code>)</td></tr>
+<tr><td><code>__ilshift__</code></td><td>self, other</td><td>Emulates augmented assignment with left bitwise shift (<code>self <<= other</code>)</td></tr>
+<tr><td><code>__irshift__</code></td><td>self, other</td><td>Emulates augmented assignment with right bitwise shift (<code>self >>= other</code>)</td></tr>
+<tr><td><code>__iand__</code></td><td>self, other</td><td>Emulates augmented assignment with bitwise and (<code>self &= other</code>)</td></tr>
+<tr><td><code>__ior__</code></td><td>self, other</td><td>Emulates augmented assignment with bitwise or (<code>self |= other</code>)</td></tr>
+<tr><td><code>__ixor__</code></td><td>self, other</td><td>Emulates augmented assignment with bitwise xor (<code>self ^= other</code>)</td></tr>
+</table>
+
+You thought it was over? It's not. We still need unary arithmetic operators.
+
+<table>
+<tr><td><strong>Magic Method</strong></td><td><strong>Arguments</strong></td><td><strong>Description</strong></td></tr>
+<tr><td><code>__pos__</code></td><td>self</td><td>Emulates unary positive(<code>+self</code>)</td></tr>
+<tr><td><code>__neg__</code></td><td>self</td><td>Emulates negation<code>-self</code>)</td></tr>
+<tr><td><code>__abs__</code></td><td>self</td><td>Emulates absolute value(<code>abs(self)</code>)</td></tr>
+<tr><td><code>__invert__</code></td><td>self</td><td>Emulates inversion(<code>~self</code>)</td></tr>
+</table>
+
+Now, we have to be able to change types:
+
+<table>
+<tr><td><strong>Magic Method</strong></td><td><strong>Arguments</strong></td><td><strong>Description</strong></td></tr>
+<tr><td><code>__float__</code></td><td>self</td><td>Converts to float(<code>float(self)</code>)</td></tr>
+<tr><td><code>__int__</code></td><td>self</td><td>Converts to int(<code>int(self)</code>)</td></tr>
+<tr><td><code>__long__</code></td><td>self</td><td>Converts to long(<code>long(self)</code>)</td></tr>
+<tr><td><code>__complex__</code></td><td>self</td><td>Converts to complex(<code>complex(self)</code>)</td></tr>
+<tr><td><code>__oct__</code></td><td>self</td><td>Converts to octal(<code>oct(self)</code>)</td></tr>
+<tr><td><code>__hex__</code></td><td>self</td><td>Converts to hexadecimal(<code>hex(self)</code>)</td></tr>
+</table>
+
+That's basically it. I don't want to implement a class to demonstrate any of this 1.) because it's fairly self explanatory and 2.) that would be one monster of a class.

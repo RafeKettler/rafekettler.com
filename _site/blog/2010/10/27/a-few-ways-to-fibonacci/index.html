@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    
+  <title>rafekettler.com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/blog/feed" />
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0"
+href="/blog/feed/atom" />
+<link rel='stylesheet' href='/css/pygments_tango.css' type='text/css' />
+<link rel='stylesheet' href='/css/site.css' type='text/css' />
+
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <h1><a href="/">rafekettler.com</a></h1>
+<h3>My thoughts on programming and technology</h3>
+<nav>
+<ul>
+<li><a href="/blog">Blog</a></li>
+<li><a href="/about.html">About me</a></li>
+<li><a href="/magicmethods.html">Magic Methods Guide</a></li>
+</ul>
+</nav>
+<hr/>
+
+
+      <div id="main_block">
+        <div id="prose_block">
+          
+
+<div class="blog_post">
+  <a name="a-few-ways-to-fibonacci"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/10/27/a-few-ways-to-fibonacci" rel="bookmark" title="Permanent Link to A few ways to Fibonacci">A few ways to Fibonacci</a></h2>
+  <p><small>10.27.2010 at 01:35 PM in 
+
+<a href='/blog/category/python'>Python</a>
+ | <a href="http://www.rafekettler.com/blog/2010/10/27/a-few-ways-to-fibonacci#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  <p>The <a href="http://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci sequence</a> is often used as a quick and intuitive way to introduce the sometimes less-than-intuitive concept of recursion. For those that don't know already, the Fibonacci sequence is (according to Wikipedia):</p>
+<blockquote>
+<p>By definition, the first two Fibonacci numbers are 0 and 1, and each subsequent number is the sum of the previous two.</p>
+</blockquote>
+<p>The recursive solution, in this case, makes a lot of sense. Here it is, implemented in Python:</p>
+<div class="pygments_tango"><pre><span class="k">def</span> <span class="nf">fibo_recursive</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="c"># gets nth fibonacci number using recursion</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>     
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fibo_recursive</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo_recursive</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> 
+</pre></div>
+
+<p>This is an intuitive solution to the problem, but it doesn't perform well. The number of calls to <code>fibo_recursive()</code> increases exponentially as n increases. Because of this problem, a faster implementation might be iterative:</p>
+<div class="pygments_tango"><pre><span class="k">def</span> <span class="nf">fibo_iterative</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="c"># gets nth Fibonacci number using loops</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">b</span>
+</pre></div>
+
+<p>This doesn't have the same elegance as the recursive version, but has excellent performance and won't cause stack overflows. However, a third solution is available that takes some of the functional programming elegance of the recursive solution and pairs it with the speed of the iterative solution.</p>
+<div class="pygments_tango"><pre><span class="k">def</span> <span class="nf">fibo_generator</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="c"># gets Fibonacci numbers up to nth number using a generator</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">a</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+
+<p>Note that this solution produces a sequence of the Fibonacci numbers. This makes the function more useful for dealing with sequences of Fibonacci numbers.</p>
+<div class="pygments_tango"><pre><span class="c"># make a list of the Fibonacci numbers up to the 100th Fibonacci number</span>
+<span class="n">fibs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fibo_generator</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">fibs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<p><span class="c">#get the sum of the Fibonacci numbers up to 100</span>
+<span class="n">sum_fibs</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fibo_generator</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+</pre></div></p>
+<p>It's a testament to the robustness of Python that even a simple problem like the Fibonacci sequence has so many good solutions, and in particular a testament to the usefulness that generators add to the Python programming language.</p>
+
+  </div>
+</div>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_url = "http://www.rafekettler.com/blog/2010/10/27/a-few-ways-to-fibonacci";
+</script>
+<script type="text/javascript" src="http://disqus.com/forums/rafekettler.com/embed.js"></script>
+<noscript><a href="http://rafekettler.com.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        </div><!-- End Prose Block -->
+      </div><!-- End Main Block -->
+      <div id="footer">
+        
+  <hr/>
+  <p id="credits">
+Copyright &copy; Rafe Kettler, 2010-11<br/>
+Powered by <a href="http://www.blogofile.com">Blogofile</a>.<br/>
+RSS feeds for <a href="/blog/feed">Entries</a>
+ and <a
+href="http://rafekettler.com.disqus.com/latest.rss">Comments</a>.
+<br>
+</p>
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/rafekettler.com/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+//]]>
+</script>
+
+
+      </div> <!-- End Footer -->
+    </div> <!-- End Content -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

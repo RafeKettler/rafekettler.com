@@ -1,0 +1,133 @@
+---
+categories: Magic Method Monday, Python
+date: 2010/11/08 16:42:42
+guid: http://rafekettler.com/?p=37
+tags: Python links, Magic-Method-Monday, OOP, data-structures
+title: 'Magic Method Monday: Creating Custom Sequences and Mappings'
+---
+In Python, the builtin types `list` and `dict` are so
+powerful that it's hard to imagine when one would need more functionality.
+However, custom functionality is needed all the time, and thankfully Python
+provides an easy protocol through inheritance and magic methods to define custom
+sequences and mappings, or container objects.
+
+**What you need**
+
+To create a custom immutable sequence, only `__len__` and
+`__getitem__` must be defined. However, mutable types like the lists
+and dictionaries we've come to love require one to also implement
+`__setitem__` and `__delitem__`. In our example, we'll be
+implementing all of them.
+
+`__len__`
+
+This magic method is relatively self explanatory. It returns the length of the
+object, much like a call to `len(somelist)` or
+`len(somedict)` would return the length of a sequence or mapping.It
+takes the argument `self`
+
+`__getitem__`
+
+`__getitem__` is implemented to describe behavior when a program
+wants to retrieve an item.It takes both `self` and `key`
+as parameters.
+
+`__setitem__`
+
+Simple enough, it defines behavior for when a program tries to change an item.
+It takes the parameters `self, key` and `value`, defining
+where and what to set in the container.
+
+`__delitem__`
+
+Defines behavior for deleting an item. Arguments are `self` and
+`key`.
+
+`__iter__`
+
+Wait, I thought there were only 4 methods to define? While that is technically
+true, `__iter__` is a must if someone wants to iterate through your
+container.
+
+**Putting it all together**
+
+Here's an extremely useless implementation of a "vocal list" that speaks out
+whenever something happens to it:
+
+$$code(lang=python)
+class VocalList:
+        
+    def __init__(self, values):
+        self.values = values
+        print "It's alive!!!"
+    
+    def __len__(self):
+        print "I'll stand still while you measure me."
+        return len(self.values)
+    
+    def __getitem__(self, key):
+        print "Would you like fries with that item?"
+        return self.values[key]
+    
+    def __setitem__(self, key, value):
+        print "I'll change for you."
+        self.values[key] = value
+            
+    def __delitem__(self, key):
+        print "I'm MELTING"
+        del self.values[key]
+    
+    def __iter__(self):
+        print "Iteration in 5, 4, 3..."
+        # make self.values iterable...
+        return iter(self.values)
+$$/code
+
+An example of a session with `VocalList`:
+
+$$code(lang=pythonconsole)
+>>> v = VocalList([1, 2, 3, 4])
+It's alive!!!
+>>> len(v)
+I'll stand still while you measure me.
+4
+>>> v[1]
+Would you like fries with that item?
+2
+>>> v[3] = 5
+I'll change for you.
+>>> del v[3]
+I'm MELTING
+>>> for i in v:
+...     print i
+... 
+Iteration in 5, 4, 3...
+1
+2
+3
+4
+$$/code
+
+**A better way of doing things**
+
+Of course, the list implementation that we defined earlier is incomplete. It
+lacks many of the amenities of regular Python lists, including favorite methods
+`append`, `sort`, `index`, and others. But
+new-style classes (which are hardly a new language feature at this point) allow
+classes to subclass types.This means that by simply inheriting all the good
+stuff from the builtin `list` type, we can define some custom
+behavior but keep all the list methods we know and love. Example:
+
+$$code(lang=python)
+class ProtectiveList(list):
+    """A list that won't let its items be deleted on their own."""
+        
+    def __init__(self, *args):
+        # call the constructor for a list
+        super(ProtectiveList, self).__init__(*args)
+        
+    def __delitem__(self, key):
+        print "I will NOT allow that to happen."</pre>
+
+Well, there you have it. The easy way (and the hard way) to define custom
+container objects in Python. Until next monday.

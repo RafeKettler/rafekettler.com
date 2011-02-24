@@ -1,0 +1,20 @@
+---
+categories: Humor, Programming
+date: 2010/11/10 04:02:05
+guid: http://rafekettler.com/?p=52
+tags: humor, computer-science
+title: Awesome Computer Science Band Name Ideas
+---
+For a bit of fun, I've come up with a few CS-term-based band names(some of these may be taken):
+
+ - Reverse Polish notation
+ - Brainfuck
+ - The Regular Expressions
+ - Map-Reduce
+ - The Generators (or the Iterators)
+ - Reduced Instruction Set Funk
+ - C# and F#
+ - Big-Endian
+ - Tux
+
+Nerd points if you know what all this is talking about. Did I miss something? Leave a comment.

@@ -1,0 +1,127 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    
+  <title>rafekettler.com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/blog/feed" />
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0"
+href="/blog/feed/atom" />
+<link rel='stylesheet' href='/css/pygments_tango.css' type='text/css' />
+<link rel='stylesheet' href='/css/site.css' type='text/css' />
+
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <h1><a href="/">rafekettler.com</a></h1>
+<h3>My thoughts on programming and technology</h3>
+<nav>
+<ul>
+<li><a href="/blog">Blog</a></li>
+<li><a href="/about.html">About me</a></li>
+<li><a href="/magicmethods.html">Magic Methods Guide</a></li>
+</ul>
+</nav>
+<hr/>
+
+
+      <div id="main_block">
+        <div id="prose_block">
+          
+
+<div class="blog_post">
+  <a name="other-languages-have-magic-methods"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/04/other-languages-have-magic-methods" rel="bookmark" title="Permanent Link to Other languages have magic methods?!?">Other languages have magic methods?!?</a></h2>
+  <p><small>12.04.2010 at 06:26 PM in 
+
+<a href='/blog/category/python'>Python</a>, <a href='/blog/category/php'>PHP</a>, <a href='/blog/category/programming'>Programming</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/04/other-languages-have-magic-methods#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  <p>I've been teaching myself PHP and I've discovered that PHP uses magic methods, like Python. I have mixed feelings about this: I like that PHP uses the awesomeness that is magic methods, and I like that they took hints from Python<sup>[<a name="id394062" href="#ftn.id394062">1</a>]</sup> (I did some research, and PHP's magic methods only came in PHP 3, circa 1998, whereas Python has had magic methods since before 1.0). I don't, however, like that their magic methods start with two underscores but have no trailing underscores (this will conflict with some of the naming practices that I'm used to, but I'm sure it won't be a problem in a language with true visibility control), and that they have different names than their Python counterparts.</p>
+<p>So, for my convenience and the convenience of other Pythonistas that find they must use PHP (not the worst fate, but not as clean as I'm used to), I've written up some PHP magic methods and their Python equivalents for easy reference. For actual reference, you can actually go to the <a href="http://us3.php.net/manual/en/language.oop5.php">PHP manual's pages on classes</a> and look at how they describe them.</p>
+<ul>
+<li><code>__construct</code> translates to <code>__init__</code></li>
+<li><code>__destruct</code> translates (roughly) to <code>__del__</code>, since it gets called when an object gets deleted, though I haven't learned yet how to explicitly delete a PHP object</li>
+<li><code>__call</code> doesn't have a direct equivalent. It defines some standard behavior when a method is called. It can be emulated with <code>__getattr__</code> (see <a href="http://stackoverflow.com/questions/1626478/python-getattribute-or-getattr-to-emulate-php-call">this</a> for how), but I don't see why it would be needed. Similar behavior can be achieved with decorators (in a more explicit and deliberate manner, too).</li>
+<li><code>__callStatic</code> is the same story, it's like <code>__call</code> but it gets invoked when a method is called in a static context.</li>
+<li><code>__get</code> and <code>__set</code> are similar to Python's <code>property()</code> function, in that they allow you to define behavior for attribute access.</li>
+<li><code>__toStr</code> is equivalent to <code>__str__</code></li>
+<li><code>__invoke</code> is equivalent to <code>__call__</code></li>
+</ul>
+<p>Sadly, PHP doesn't readily support a lot of the stuff that makes classes so cool and so powerful in Python. In Python, operator overloading is as simple as defining <code>__add__</code> or <code>__eq__</code>, but PHP doesn't let you do this. It's also not really possible to make classes behave as types, like we know and cherish in Python.</p>
+<p>As for a brief review on my journey into PHP so far: for someone coming from a Java/Python background, it's very easy to learn. Very few things have confused/surprised me so far (except for the inconsistent/nonsense naming of functions and methods). The main advantage of PHP, IMO, is convenience: it's always there, without having to use CGI or a framework it's web-ready, which is good for a lot of things, particularly small tasks.</p>
+<div class="footnote"><sup>[<a name="ftn.id394062" href="#id394062">1</a>]</sup>
+This is a conceited statement coming from a Python ultranationalist. I know Python had magic methods way before PHP, but I can't be certain that's where PHP got it from (Python may have gotten magic methods from somewhere else), or that Rasmus Lerdorf didn't just come up with the idea himself (though that's doubtful)</div>
+
+  </div>
+</div>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_url = "http://www.rafekettler.com/blog/2010/12/04/other-languages-have-magic-methods";
+</script>
+<script type="text/javascript" src="http://disqus.com/forums/rafekettler.com/embed.js"></script>
+<noscript><a href="http://rafekettler.com.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        </div><!-- End Prose Block -->
+      </div><!-- End Main Block -->
+      <div id="footer">
+        
+  <hr/>
+  <p id="credits">
+Copyright &copy; Rafe Kettler, 2010-11<br/>
+Powered by <a href="http://www.blogofile.com">Blogofile</a>.<br/>
+RSS feeds for <a href="/blog/feed">Entries</a>
+ and <a
+href="http://rafekettler.com.disqus.com/latest.rss">Comments</a>.
+<br>
+</p>
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/rafekettler.com/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+//]]>
+</script>
+
+
+      </div> <!-- End Footer -->
+    </div> <!-- End Content -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

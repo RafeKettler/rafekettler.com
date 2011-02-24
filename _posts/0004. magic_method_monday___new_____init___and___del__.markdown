@@ -1,0 +1,44 @@
+---
+categories: Magic Method Monday, Python
+date: 2010/11/01 05:37:06
+guid: http://rafekettler.com/?p=23
+tags: Python links, Magic-Method-Monday, OOP
+title: 'Magic Method Monday: __new__, __init__, and __del__'
+---
+I'm starting a little thing called Magic Method Monday (3M for short, I suppose), in which I delve into some of the mysterious, double-underscore encased "magic methods" that make object-oriented programming in Python work. Some of the earlier magic methods (like today's) are a bit basic, but hopefully in due time I'll have a chance to delve into some of the underused and misunderstood magic methods that hide away in the annals of the Python language.
+
+Without further adieu, here are today's magic methods:
+
+`__new__`
+
+`__new__` is the first method called when an object is instantiated. It takes the class as an argument and passes any arguments that the instance was created with to our next magic method, `__init__`. `__new__` is also useful for creating immutable instance variables. `__new__` isn't used very often, however.
+
+`__init__`
+
+`__init__` does the initialization work for an object, and is the most commonly used magic method in object-oriented Python programming. Most all classes define `__init__`. `__init__` always takes `self` as a first argument.
+
+Together, `__new__` and `__init__` make up the constructor for a class. Now, you might ask, what makes up the destructor?
+
+`__del__`
+
+`__del__` can be defined in a class definition to create special behavior for the destruction of an instance of a class. `__del__` also takes `self` as a first and only argument.
+
+Now, time for a (somewhat ridiculous) example. Say you wanted to implement a class that represents a file object that can be read from or written to. You'd need to define `__init__` to initialize the instance variables correctly and `__del__` to make sure the file stream is closed when the object is no longer needed. Here is a basic prototype for that class:
+
+$$code(lang=python)
+from os.path import join
+
+class FileObject:
+    
+    def __init__(self, filepath='/home/user_name', filename='sample.txt'):
+        # open a file filename in filepath in read and write mode
+        self.file = open(join(filepath, filename), 'rw')
+    
+    def __del__(self):
+        self.file.close()
+        del self.file
+$$/code
+
+In this case, `__del__` was used to make sure that the file connection was closed when all was said and done.
+
+Tune in next week for more magic methods. Thanks for reading.

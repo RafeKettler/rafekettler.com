@@ -1,0 +1,17 @@
+---
+categories: Magic Method Monday, Python, Programming
+date: 2010/12/28 19:36:55
+guid: http://rafekettler.com/?p=228
+tags: Python links, Magic-Method-Monday, OOP, programming
+title: 'Magic Method Monday: Reflection'
+---
+Sorry for the late post, but the past week has been a bit hectic, with Christmas and all. Today, we have two magic methods: `__instancecheck__` and `__subclasscheck__`: they allow us to define custom behavior for reflection.
+
+`__instancecheck__`
+
+Implements `isinstance(instance, class)`. Takes arguments `self` and `instance`.
+
+`__subclasscheck__`
+
+Implements `issubclass(subclass, class)`. Takes arguments `self` and `subclass`.
+         

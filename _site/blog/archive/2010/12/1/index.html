@@ -1,0 +1,290 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    
+  <title>rafekettler.com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/blog/feed" />
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0"
+href="/blog/feed/atom" />
+<link rel='stylesheet' href='/css/pygments_tango.css' type='text/css' />
+<link rel='stylesheet' href='/css/site.css' type='text/css' />
+
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <h1><a href="/">rafekettler.com</a></h1>
+<h3>My thoughts on programming and technology</h3>
+<nav>
+<ul>
+<li><a href="/blog">Blog</a></li>
+<li><a href="/about.html">About me</a></li>
+<li><a href="/magicmethods.html">Magic Methods Guide</a></li>
+</ul>
+</nav>
+<hr/>
+
+
+      <div id="main_block">
+        <div id="prose_block">
+          
+  
+<div class="blog_post">
+  <a name="magic-method-monday-reflection"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/28/magic-method-monday-reflection" rel="bookmark" title="Permanent Link to Magic Method Monday: Reflection">Magic Method Monday: Reflection</a></h2>
+  <p><small>12.28.2010 at 07:36 PM in 
+
+<a href='/blog/category/python'>Python</a>, <a href='/blog/category/programming'>Programming</a>, <a href='/blog/category/magic-method-monday'>Magic Method Monday</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/28/magic-method-monday-reflection#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  Sorry for the late post, but the past week has been a bit hectic, with Christmas and all. Today, we have two magic methods: __instancecheck__ and __subclasscheck__: they allow us to define custom behavior for reflection.__instancecheck__Implements isinstance(instance, class). Takes arguments self and instance.__subclasscheck__Implements issubclass(subclass, class). Takes arguments self and subclass....
+
+  </div>
+</div>
+
+
+
+  <div class="after_post"><a href="http://www.rafekettler.com/blog/2010/12/28/magic-method-monday-reflection#disqus_thread">Read and Post Comments</a></div>
+  <hr class="interblog" />
+  
+<div class="blog_post">
+  <a name="avoiding-overloading-constructors-in-scala"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/23/avoiding-overloading-constructors-in-scala" rel="bookmark" title="Permanent Link to Avoiding overloading constructors in Scala">Avoiding overloading constructors in Scala</a></h2>
+  <p><small>12.23.2010 at 05:06 AM in 
+
+<a href='/blog/category/programming'>Programming</a>, <a href='/blog/category/scala'>Scala</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/23/avoiding-overloading-constructors-in-scala#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  I'm working my way through Programming in Scala, 1st edition. I didn't know there was a second edition, but when I perused the list of Scala 2.8-specific additions that it had, one really caught my eye: "Named and default parameters".This really hits close to my heart. One of my favorite...
+
+  </div>
+</div>
+
+
+
+  <div class="after_post"><a href="http://www.rafekettler.com/blog/2010/12/23/avoiding-overloading-constructors-in-scala#disqus_thread">Read and Post Comments</a></div>
+  <hr class="interblog" />
+  
+<div class="blog_post">
+  <a name="magic-method-monday-custom-numeric-types"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/20/magic-method-monday-custom-numeric-types" rel="bookmark" title="Permanent Link to Magic Method Monday: Custom Numeric Types">Magic Method Monday: Custom Numeric Types</a></h2>
+  <p><small>12.20.2010 at 05:19 AM in 
+
+<a href='/blog/category/python'>Python</a>, <a href='/blog/category/programming'>Programming</a>, <a href='/blog/category/magic-method-monday'>Magic Method Monday</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/20/magic-method-monday-custom-numeric-types#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  I've been dreading doing this MMM for a while, but it's worth it. Python magic methods can do just about anything; make sequences that behave like language constructs, make descriptors, even make comparisons using operators like ==. Most of you have already figured out that there's a way to make...
+
+  </div>
+</div>
+
+
+
+  <div class="after_post"><a href="http://www.rafekettler.com/blog/2010/12/20/magic-method-monday-custom-numeric-types#disqus_thread">Read and Post Comments</a></div>
+  <hr class="interblog" />
+  
+<div class="blog_post">
+  <a name="magic-methods-sequences-continued"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/17/magic-methods-sequences-continued" rel="bookmark" title="Permanent Link to Magic Methods: Sequences Continued">Magic Methods: Sequences Continued</a></h2>
+  <p><small>12.17.2010 at 10:37 PM in 
+
+<a href='/blog/category/python'>Python</a>, <a href='/blog/category/programming'>Programming</a>, <a href='/blog/category/magic-method-monday'>Magic Method Monday</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/17/magic-methods-sequences-continued#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  It came to my attention that I left out a few magic methods when I covered sequences a few months ago. I know it's not Monday, but I don't feel like waiting to tackle this, and I have a free minute now.__reversed____reversed defines behavior for when you call reversed() on...
+
+  </div>
+</div>
+
+
+
+  <div class="after_post"><a href="http://www.rafekettler.com/blog/2010/12/17/magic-methods-sequences-continued#disqus_thread">Read and Post Comments</a></div>
+  <hr class="interblog" />
+  
+<div class="blog_post">
+  <a name="who-knew-the-egyptians-did-math-the-way-computers-do-it"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/17/who-knew-the-egyptians-did-math-the-way-computers-do-it" rel="bookmark" title="Permanent Link to Who knew: the Egyptians did math the way computers do it">Who knew: the Egyptians did math the way computers do it</a></h2>
+  <p><small>12.17.2010 at 03:44 AM in 
+
+<a href='/blog/category/computer-science'>Computer science</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/17/who-knew-the-egyptians-did-math-the-way-computers-do-it#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  I saw an excellent video on how the Egyptian system of math is base-2, which also forms the basis for today's computers. It's an interesting tribute to the role math has played in inventing the computer (Church, Turing, Von Neumann, and others, were mathematicians, not computer scientists, after all), and...
+
+  </div>
+</div>
+
+
+
+  <div class="after_post"><a href="http://www.rafekettler.com/blog/2010/12/17/who-knew-the-egyptians-did-math-the-way-computers-do-it#disqus_thread">Read and Post Comments</a></div>
+  <hr class="interblog" />
+  
+<div class="blog_post">
+  <a name="why-php-throws-me"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/15/why-php-throws-me" rel="bookmark" title="Permanent Link to Why PHP Throws Me">Why PHP Throws Me</a></h2>
+  <p><small>12.15.2010 at 05:52 PM in 
+
+<a href='/blog/category/php'>PHP</a>, <a href='/blog/category/programming'>Programming</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/15/why-php-throws-me#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  After learning PHP for a few weeks, it was very disorienting. It had no right to be -- I'm familiar with C-style syntax and I program in dynamically typed, interpreted languages all the time (though the $ sigils before variables make me a bit dizzy). All the syntax -- functions,...
+
+  </div>
+</div>
+
+
+
+  <div class="after_post"><a href="http://www.rafekettler.com/blog/2010/12/15/why-php-throws-me#disqus_thread">Read and Post Comments</a></div>
+  <hr class="interblog" />
+  
+<div class="blog_post">
+  <a name="magic-method-monday-descriptors"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/13/magic-method-monday-descriptors" rel="bookmark" title="Permanent Link to Magic Method Monday: Descriptors">Magic Method Monday: Descriptors</a></h2>
+  <p><small>12.13.2010 at 04:19 AM in 
+
+<a href='/blog/category/python'>Python</a>, <a href='/blog/category/programming'>Programming</a>, <a href='/blog/category/magic-method-monday'>Magic Method Monday</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/13/magic-method-monday-descriptors#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  Descriptors are classes which, when accessed through either getting, setting, or deleting, can also alter other objects. Descriptors aren't meant to stand alone; rather, they're meant to be held by an owner class. Descriptors can be useful when building object-oriented databases or classes that have attributes whose values are dependent...
+
+  </div>
+</div>
+
+
+
+  <div class="after_post"><a href="http://www.rafekettler.com/blog/2010/12/13/magic-method-monday-descriptors#disqus_thread">Read and Post Comments</a></div>
+  <hr class="interblog" />
+  
+<div class="blog_post">
+  <a name="magic-method-monday-custom-attribute-access"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/06/magic-method-monday-custom-attribute-access" rel="bookmark" title="Permanent Link to Magic Method Monday: custom attribute access">Magic Method Monday: custom attribute access</a></h2>
+  <p><small>12.06.2010 at 05:29 PM in 
+
+<a href='/blog/category/uncategorized'>Uncategorized</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/06/magic-method-monday-custom-attribute-access#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  We've been a long way through Magic Method Monday, and now it's time to get to some of the more advance magic methods. Today, it's __getattr__, __setattr__, __delattr__, and __getattribute__.__getattr____getattr__ defines behavior when an attribute that doesn't exist (either yet or at all) is accessed. It takes the arguments self...
+
+  </div>
+</div>
+
+
+
+  <div class="after_post"><a href="http://www.rafekettler.com/blog/2010/12/06/magic-method-monday-custom-attribute-access#disqus_thread">Read and Post Comments</a></div>
+  <hr class="interblog" />
+  
+<div class="blog_post">
+  <a name="other-languages-have-magic-methods"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/04/other-languages-have-magic-methods" rel="bookmark" title="Permanent Link to Other languages have magic methods?!?">Other languages have magic methods?!?</a></h2>
+  <p><small>12.04.2010 at 06:26 PM in 
+
+<a href='/blog/category/python'>Python</a>, <a href='/blog/category/php'>PHP</a>, <a href='/blog/category/programming'>Programming</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/04/other-languages-have-magic-methods#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  I've been teaching myself PHP and I've discovered that PHP uses magic methods, like Python. I have mixed feelings about this: I like that PHP uses the awesomeness that is magic methods, and I like that they took hints from Python[1] (I did some research, and PHP's magic methods only...
+
+  </div>
+</div>
+
+
+
+  <div class="after_post"><a href="http://www.rafekettler.com/blog/2010/12/04/other-languages-have-magic-methods#disqus_thread">Read and Post Comments</a></div>
+  <hr class="interblog" />
+  
+<div class="blog_post">
+  <a name="a-truly-great-python-fail"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/03/a-truly-great-python-fail" rel="bookmark" title="Permanent Link to A Truly Great Python Fail">A Truly Great Python Fail</a></h2>
+  <p><small>12.03.2010 at 06:01 AM in 
+
+<a href='/blog/category/python'>Python</a>, <a href='/blog/category/humor'>Humor</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/03/a-truly-great-python-fail#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  I saw this on Stack Overflow, and I almost soiled myself with how funny it is. Without any further adieu, here's the snippet:def my_func(name=None):    if name isn&#39;t None:        # do somethingIf The Daily WTF took Python code (it has almost...
+
+  </div>
+</div>
+
+
+
+  <div class="after_post"><a href="http://www.rafekettler.com/blog/2010/12/03/a-truly-great-python-fail#disqus_thread">Read and Post Comments</a></div>
+  <hr class="interblog" />
+ <a href="../2">Next Page »</a>
+
+        </div><!-- End Prose Block -->
+      </div><!-- End Main Block -->
+      <div id="footer">
+        
+  <hr/>
+  <p id="credits">
+Copyright &copy; Rafe Kettler, 2010-11<br/>
+Powered by <a href="http://www.blogofile.com">Blogofile</a>.<br/>
+RSS feeds for <a href="/blog/feed">Entries</a>
+ and <a
+href="http://rafekettler.com.disqus.com/latest.rss">Comments</a>.
+<br>
+</p>
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/rafekettler.com/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+//]]>
+</script>
+
+
+      </div> <!-- End Footer -->
+    </div> <!-- End Content -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

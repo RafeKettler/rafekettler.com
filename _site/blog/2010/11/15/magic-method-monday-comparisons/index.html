@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    
+  <title>rafekettler.com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/blog/feed" />
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0"
+href="/blog/feed/atom" />
+<link rel='stylesheet' href='/css/pygments_tango.css' type='text/css' />
+<link rel='stylesheet' href='/css/site.css' type='text/css' />
+
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <h1><a href="/">rafekettler.com</a></h1>
+<h3>My thoughts on programming and technology</h3>
+<nav>
+<ul>
+<li><a href="/blog">Blog</a></li>
+<li><a href="/about.html">About me</a></li>
+<li><a href="/magicmethods.html">Magic Methods Guide</a></li>
+</ul>
+</nav>
+<hr/>
+
+
+      <div id="main_block">
+        <div id="prose_block">
+          
+
+<div class="blog_post">
+  <a name="magic-method-monday-comparisons"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/11/15/magic-method-monday-comparisons" rel="bookmark" title="Permanent Link to Magic Method Monday: Comparisons">Magic Method Monday: Comparisons</a></h2>
+  <p><small>11.15.2010 at 03:03 AM in 
+
+<a href='/blog/category/python'>Python</a>, <a href='/blog/category/magic-method-monday'>Magic Method Monday</a>
+ | <a href="http://www.rafekettler.com/blog/2010/11/15/magic-method-monday-comparisons#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  <p>Python has incredibly strong support for operator overloading in user-defined types and classes. Using the magic methods that define custom behavior for comparing objects, we can create our own full featured types that feature sleek comparisons using normal operators.</p>
+<p>`<strong>eq</strong></p>
+<p>Defines custom behavior for the <code>==</code> operator. Takes arguments self and other.</p>
+<p><code>__lt__</code></p>
+<p>Defines custom behavior for the <code>&lt;</code> operator.</p>
+<p><code>__gt__</code></p>
+<p>Defines custom behavior for the <code>&gt;</code> operator.</p>
+<p><code>__le__</code></p>
+<p>Defines custom behavior for the <code>&lt;=</code> operator.</p>
+<p><code>__ge__</code></p>
+<p>Defines custom behavior for the <code>&gt;;=</code> operator.</p>
+<p><code>__ne__</code></p>
+<p>Defines custom behavior for the <code>!=</code> operator.</p>
+<p><code>Comparison magic methods in action</code></p>
+<p>By using these magic methods, we can implement a class that overloads the comparison operators. Here's a class that compares based on the sum of it's list of values:</p>
+<div class="pygments_tango"><pre><span class="k">class</span> <span class="nc">SumCompare</span><span class="p">:</span>
+
+<pre><code> &lt;span class="c"&gt;# Class that defines comparisons based on the sum of it&amp;#39;s value list&lt;/span&gt;
+ &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt;
+
+ &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__eq__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="c"&gt;# if other isn&amp;#39;t an iterable or can&amp;#39;t be summed&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+
+ &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__lt__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+
+ &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="n"&gt;snip&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;
+</code></pre>
+<p></pre></div></p>
+
+  </div>
+</div>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_url = "http://www.rafekettler.com/blog/2010/11/15/magic-method-monday-comparisons";
+</script>
+<script type="text/javascript" src="http://disqus.com/forums/rafekettler.com/embed.js"></script>
+<noscript><a href="http://rafekettler.com.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        </div><!-- End Prose Block -->
+      </div><!-- End Main Block -->
+      <div id="footer">
+        
+  <hr/>
+  <p id="credits">
+Copyright &copy; Rafe Kettler, 2010-11<br/>
+Powered by <a href="http://www.blogofile.com">Blogofile</a>.<br/>
+RSS feeds for <a href="/blog/feed">Entries</a>
+ and <a
+href="http://rafekettler.com.disqus.com/latest.rss">Comments</a>.
+<br>
+</p>
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/rafekettler.com/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+//]]>
+</script>
+
+
+      </div> <!-- End Footer -->
+    </div> <!-- End Content -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

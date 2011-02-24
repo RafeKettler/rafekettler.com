@@ -1,0 +1,8 @@
+---
+categories: Uncategorized
+date: 2011/01/20 04:56:35
+guid: http://rafekettler.com/?p=264
+tags: ''
+title: The magic methods guide now has a github repo
+---
+Check out the github repo for the magic methods guide at http://www.github.com/RafeKettler/magicmethods. Maybe you could even try and find an issue?

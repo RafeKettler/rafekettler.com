@@ -1,0 +1,133 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    
+  <title>rafekettler.com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/blog/feed" />
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0"
+href="/blog/feed/atom" />
+<link rel='stylesheet' href='/css/pygments_tango.css' type='text/css' />
+<link rel='stylesheet' href='/css/site.css' type='text/css' />
+
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <h1><a href="/">rafekettler.com</a></h1>
+<h3>My thoughts on programming and technology</h3>
+<nav>
+<ul>
+<li><a href="/blog">Blog</a></li>
+<li><a href="/about.html">About me</a></li>
+<li><a href="/magicmethods.html">Magic Methods Guide</a></li>
+</ul>
+</nav>
+<hr/>
+
+
+      <div id="main_block">
+        <div id="prose_block">
+          
+
+<div class="blog_post">
+  <a name="avoiding-overloading-constructors-in-scala"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/23/avoiding-overloading-constructors-in-scala" rel="bookmark" title="Permanent Link to Avoiding overloading constructors in Scala">Avoiding overloading constructors in Scala</a></h2>
+  <p><small>12.23.2010 at 05:06 AM in 
+
+<a href='/blog/category/programming'>Programming</a>, <a href='/blog/category/scala'>Scala</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/23/avoiding-overloading-constructors-in-scala#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  <p>I'm working my way through <a href="http://www.artima.com/shop/programming_in_scala">Programming in Scala, 1st edition</a>. I didn't know there was a second edition, but when I perused the list of Scala 2.8-specific additions that it had, one really caught my eye: "Named and default parameters".</p>
+<p>This really hits close to my heart. One of my favorite things about Python was the ability to use named parameters, which greatly simplifies using APIs and the standard library, and default arguments, which provides users with fine-tuned control when they need it and common options when they don't. It's really a great feature, and the best part about it is that it completely eliminates the need for overloading methods and functions.</p>
+<p>In Scala, the thing that I liked the most was how concisely you could define a constructor:</p>
+<div class="pygments_tango"><pre><span class="k">class</span> <span class="nc">MyClass</span><span class="o">(</span><span class="n">paramA</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">paramB</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">// Your constructor code here...</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>How great is that? No stupid <code>def MyClass(paramA: Int, paramB: Int) = ...</code>, just good old fashioned, to-the-point construction. It also makes code more readable that way, because you can learn a lot about a class just by reading its declaration stub (for example, that it takes 2 parameters in construction, 2 Ints). However, when you want to define alternate constructors, things go to hell with overloading:</p>
+<div class="pygments_tango"><pre><span class="k">class</span> <span class="nc">MyClass</span><span class="o">(</span><span class="n">paramA</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">paramB</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">// Your constructor code here...</span>
+
+<p><span class="k">def</span> <span class="k">this</span><span class="o">(</span><span class="n">paramA</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="k">this</span><span class="o">(</span><span class="n">paramA</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span> <span class="c1">//Why is this necessary?</span>
+<span class="o">}</span>
+</pre></div></p>
+<p>Perfectly beautiful class definition ruined by an ugly this. But when I found out named and default parameters were in Scala 2.8, I had to try it with constructors. Turns out, it works! Code beautified and simplified, and now the class declaration stub is more informative than ever.</p>
+<p>$$code(lang=scala)
+class MyClass(paramA: Int, paramB: Int = 1) {
+  // Your constructor code here...
+}</p>
+<p>I think Scala and I are going to like each other...</p>
+
+  </div>
+</div>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_url = "http://www.rafekettler.com/blog/2010/12/23/avoiding-overloading-constructors-in-scala";
+</script>
+<script type="text/javascript" src="http://disqus.com/forums/rafekettler.com/embed.js"></script>
+<noscript><a href="http://rafekettler.com.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        </div><!-- End Prose Block -->
+      </div><!-- End Main Block -->
+      <div id="footer">
+        
+  <hr/>
+  <p id="credits">
+Copyright &copy; Rafe Kettler, 2010-11<br/>
+Powered by <a href="http://www.blogofile.com">Blogofile</a>.<br/>
+RSS feeds for <a href="/blog/feed">Entries</a>
+ and <a
+href="http://rafekettler.com.disqus.com/latest.rss">Comments</a>.
+<br>
+</p>
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/rafekettler.com/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+//]]>
+</script>
+
+
+      </div> <!-- End Footer -->
+    </div> <!-- End Content -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

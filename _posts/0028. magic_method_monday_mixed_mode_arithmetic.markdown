@@ -1,0 +1,16 @@
+---
+categories: Magic Method Monday, Python, Programming
+date: 2011/01/17 17:11:15
+guid: http://rafekettler.com/?p=261
+tags: Magic-Method-Monday, OOP, programming
+title: 'Magic Method Monday: Mixed Mode Arithmetic'
+---
+This may very well be the last magic methods blog post, and it's fitting that I'll be addressing a method that I initially overlooked.
+
+Python would be very hard to use without mixed-mode arithmetic: imagine what Python would be like if a type-conversion was necessary to add an integer to a float. In order to make our classes behave the same way, we can define a `__coerce__` method.
+
+`__coerce__`
+
+Method to implement mixed mode arithmetic. Takes arguments `self` and `other`. Should return `None` if type conversion is impossible. Otherwise, it should return a pair (2-tuple) of self and other, manipulated to have the same type.
+
+That's all for now; it seems that I'll have to find another weekly series to tackle. Keep watching the magic methods guide [here](http://www.rafekettler.com/magicmethods.html).

@@ -1,0 +1,18 @@
+---
+categories: Magic Method Monday, Python, Programming
+date: 2010/12/17 22:37:33
+guid: http://rafekettler.com/?p=194
+tags: ''
+title: 'Magic Methods: Sequences Continued'
+---
+It came to my attention that I left out a few magic methods when I covered sequences a few months ago. I know it's not Monday, but I don't feel like waiting to tackle this, and I have a free minute now.
+
+`__reversed__`
+
+`__reversed` defines behavior for when you call `reversed()` on your sequence. Takes self.
+
+`__contains__`
+
+`__contains` defines behavior for when we use `in` with a custom sequence, e.g. `x in y` or `x not in y`. It takes arguments self and item to test for membership. Note that this doesn't need to be defined for `in` to work with a custom sequence; the default behavior for `x in y` is to iterate over y and return True if any of the values in y are x.
+
+That's all for today, happy holidays everyone.

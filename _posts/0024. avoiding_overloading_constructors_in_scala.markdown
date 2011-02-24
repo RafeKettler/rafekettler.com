@@ -1,0 +1,37 @@
+---
+categories: Programming, Scala
+date: 2010/12/23 05:06:00
+guid: http://rafekettler.com/?p=221
+tags: OOP, programming, scala
+title: Avoiding overloading constructors in Scala
+---
+I'm working my way through [Programming in Scala, 1st edition](http://www.artima.com/shop/programming_in_scala). I didn't know there was a second edition, but when I perused the list of Scala 2.8-specific additions that it had, one really caught my eye: "Named and default parameters".
+
+This really hits close to my heart. One of my favorite things about Python was the ability to use named parameters, which greatly simplifies using APIs and the standard library, and default arguments, which provides users with fine-tuned control when they need it and common options when they don't. It's really a great feature, and the best part about it is that it completely eliminates the need for overloading methods and functions.
+
+In Scala, the thing that I liked the most was how concisely you could define a constructor:
+
+$$code(lang=scala)
+class MyClass(paramA: Int, paramB: Int) {
+  // Your constructor code here...
+}
+$$/code
+
+How great is that? No stupid `def MyClass(paramA: Int, paramB: Int) = ...`, just good old fashioned, to-the-point construction. It also makes code more readable that way, because you can learn a lot about a class just by reading its declaration stub (for example, that it takes 2 parameters in construction, 2 Ints). However, when you want to define alternate constructors, things go to hell with overloading:
+
+$$code(lang=scala)
+class MyClass(paramA: Int, paramB: Int) {
+  // Your constructor code here...
+    
+  def this(paramA: Int) = this(paramA, 1) //Why is this necessary?
+}
+$$/code
+
+Perfectly beautiful class definition ruined by an ugly this. But when I found out named and default parameters were in Scala 2.8, I had to try it with constructors. Turns out, it works! Code beautified and simplified, and now the class declaration stub is more informative than ever.
+
+$$code(lang=scala)
+class MyClass(paramA: Int, paramB: Int = 1) {
+  // Your constructor code here...
+}
+
+I think Scala and I are going to like each other...

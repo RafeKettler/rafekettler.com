@@ -1,0 +1,8 @@
+---
+categories: Uncategorized
+date: 2011/01/24 23:26:57
+guid: http://rafekettler.com/?p=270
+tags: ''
+title: Magic Methods Guide is Complete
+---
+It's finally done (feature-complete, I mean). It still may have errors, but it works. Check it out [here](http://www.rafekettler.com/magicmethods.html).

@@ -1,0 +1,25 @@
+---
+categories: PHP, Python, Programming
+date: 2010/12/04 18:26:02
+guid: http://rafekettler.com/?p=127
+tags: Python links, OOP, programming, PHP
+title: Other languages have magic methods?!?
+---
+I've been teaching myself PHP and I've discovered that PHP uses magic methods, like Python. I have mixed feelings about this: I like that PHP uses the awesomeness that is magic methods, and I like that they took hints from Python<sup>[<a name="id394062" href="#ftn.id394062">1</a>]</sup> (I did some research, and PHP's magic methods only came in PHP 3, circa 1998, whereas Python has had magic methods since before 1.0). I don't, however, like that their magic methods start with two underscores but have no trailing underscores (this will conflict with some of the naming practices that I'm used to, but I'm sure it won't be a problem in a language with true visibility control), and that they have different names than their Python counterparts.
+
+So, for my convenience and the convenience of other Pythonistas that find they must use PHP (not the worst fate, but not as clean as I'm used to), I've written up some PHP magic methods and their Python equivalents for easy reference. For actual reference, you can actually go to the [PHP manual's pages on classes](http://us3.php.net/manual/en/language.oop5.php) and look at how they describe them.
+
+ - `__construct` translates to `__init__`
+ - `__destruct` translates (roughly) to `__del__`, since it gets called when an object gets deleted, though I haven't learned yet how to explicitly delete a PHP object
+ - `__call` doesn't have a direct equivalent. It defines some standard behavior when a method is called. It can be emulated with `__getattr__` (see [this](http://stackoverflow.com/questions/1626478/python-getattribute-or-getattr-to-emulate-php-call) for how), but I don't see why it would be needed. Similar behavior can be achieved with decorators (in a more explicit and deliberate manner, too).
+ - `__callStatic` is the same story, it's like `__call` but it gets invoked when a method is called in a static context.
+ - `__get` and `__set` are similar to Python's `property()` function, in that they allow you to define behavior for attribute access.
+ - `__toStr` is equivalent to `__str__`
+ - `__invoke` is equivalent to `__call__`
+
+Sadly, PHP doesn't readily support a lot of the stuff that makes classes so cool and so powerful in Python. In Python, operator overloading is as simple as defining `__add__` or `__eq__`, but PHP doesn't let you do this. It's also not really possible to make classes behave as types, like we know and cherish in Python.
+
+As for a brief review on my journey into PHP so far: for someone coming from a Java/Python background, it's very easy to learn. Very few things have confused/surprised me so far (except for the inconsistent/nonsense naming of functions and methods). The main advantage of PHP, IMO, is convenience: it's always there, without having to use CGI or a framework it's web-ready, which is good for a lot of things, particularly small tasks.
+
+<div class="footnote"><sup>[<a name="ftn.id394062" href="#id394062">1</a>]</sup>
+This is a conceited statement coming from a Python ultranationalist. I know Python had magic methods way before PHP, but I can't be certain that's where PHP got it from (Python may have gotten magic methods from somewhere else), or that Rasmus Lerdorf didn't just come up with the idea himself (though that's doubtful)</div>

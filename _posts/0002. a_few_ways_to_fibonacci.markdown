@@ -1,0 +1,57 @@
+---
+categories: Python
+date: 2010/10/27 13:35:52
+guid: http://rafekettler.com/?p=7
+tags: Python links, functional-programming, generators, algorithms
+title: A few ways to Fibonacci
+---
+The [Fibonacci sequence](http://en.wikipedia.org/wiki/Fibonacci_number) is often used as a quick and intuitive way to introduce the sometimes less-than-intuitive concept of recursion. For those that don't know already, the Fibonacci sequence is (according to Wikipedia):
+
+>By definition, the first two Fibonacci numbers are 0 and 1, and each subsequent number is the sum of the previous two.
+
+The recursive solution, in this case, makes a lot of sense. Here it is, implemented in Python:
+
+$$code(lang=python)
+def fibo_recursive(n):
+    # gets nth fibonacci number using recursion
+    if n < 2:
+        return n     
+    else:
+        return fibo_recursive(n - 1) + fibo_recursive(n - 2) 
+$$/code
+
+This is an intuitive solution to the problem, but it doesn't perform well. The number of calls to `fibo_recursive()` increases exponentially as n increases. Because of this problem, a faster implementation might be iterative:
+
+$$code(lang=python)
+def fibo_iterative(n):
+    # gets nth Fibonacci number using loops
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return b
+$$/code
+
+This doesn't have the same elegance as the recursive version, but has excellent performance and won't cause stack overflows. However, a third solution is available that takes some of the functional programming elegance of the recursive solution and pairs it with the speed of the iterative solution.
+
+$$code(lang=python)
+def fibo_generator(n):
+    # gets Fibonacci numbers up to nth number using a generator
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+$$/code
+
+Note that this solution produces a sequence of the Fibonacci numbers. This makes the function more useful for dealing with sequences of Fibonacci numbers.
+
+$$code(lang=python)
+# make a list of the Fibonacci numbers up to the 100th Fibonacci number
+fibs = []
+for x in fibo_generator(100):
+    fibs.append(x)
+
+#get the sum of the Fibonacci numbers up to 100
+sum_fibs = sum(x for x in fibo_generator(100))
+$$/code
+
+It's a testament to the robustness of Python that even a simple problem like the Fibonacci sequence has so many good solutions, and in particular a testament to the usefulness that generators add to the Python programming language.

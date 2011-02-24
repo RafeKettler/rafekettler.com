@@ -1,0 +1,143 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    
+  <title>rafekettler.com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/blog/feed" />
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0"
+href="/blog/feed/atom" />
+<link rel='stylesheet' href='/css/pygments_tango.css' type='text/css' />
+<link rel='stylesheet' href='/css/site.css' type='text/css' />
+
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <h1><a href="/">rafekettler.com</a></h1>
+<h3>My thoughts on programming and technology</h3>
+<nav>
+<ul>
+<li><a href="/blog">Blog</a></li>
+<li><a href="/about.html">About me</a></li>
+<li><a href="/magicmethods.html">Magic Methods Guide</a></li>
+</ul>
+</nav>
+<hr/>
+
+
+      <div id="main_block">
+        <div id="prose_block">
+          
+
+<div class="blog_post">
+  <a name="why-php-throws-me"></a>
+  <h2 class="blog_post_title"><a href="/blog/2010/12/15/why-php-throws-me" rel="bookmark" title="Permanent Link to Why PHP Throws Me">Why PHP Throws Me</a></h2>
+  <p><small>12.15.2010 at 05:52 PM in 
+
+<a href='/blog/category/php'>PHP</a>, <a href='/blog/category/programming'>Programming</a>
+ | <a href="http://www.rafekettler.com/blog/2010/12/15/why-php-throws-me#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  <p>After learning PHP for a few weeks, it was very disorienting. It had no right to be -- I'm familiar with C-style syntax and I program in dynamically typed, interpreted languages all the time (though the $ sigils before variables make me a bit dizzy). All the syntax -- functions, classes, control flow -- either remind me of C, Java, or Python. The thing that throws most people -- the <em>wild</em> inconsistency in naming conventions -- confuses me a bit, but I've basically gotten over it. Even the lack of a real sense of scope (I don't have to do anything to use a MySQL function, I just use it, same with the rest of the standard library, AFAIK) was possible to overcome.</p>
+<p>I figured out what really bothers me about it --  it subverts my expectations for programming style. I'm used to doing some things with objects and others procedurally. PHP doesn't -- it seems like many things are procedural when they have no right to be, and it makes the language look like a mess.</p>
+<p>I think the design choice that Python really got right (along with a few other languages) is making some basic types as well as much of the standard library object-oriented. Where Python has list methods, PHP has 50+ functions that operate on arrays procedurally. What is <code>last_elem = some_list.pop()</code> in Python becomes <code>$last_elem = array_pop($some_list)</code> in PHP. My preference towards the Python style is probably just my upbringing -- but I don't see why, in a dynamically-typed language, I have to constantly type <code>array_this()</code> and <code>array_that()</code> to operate on arrays.</p>
+<p>I suppose this has its roots in PHP's heritage -- it didn't start out object-oriented, so in an attempt to not break compatibility, the procedural relics were kept. But even as much as I admonish "There's More Than One Way To Do It", you'd think by now they'd have at least made it so you could operate on strings and arrays using methods. This is why I like where PHP 5 is going (or has been going) -- things that for really no good reason used to be procedural are now object-oriented. When working with the <code>mysql</code> extension, I feel like I'm programming in C, passing around an object from function to function (except in some cases, this can be implicit, which also irks me). But <code>mysqli</code> fixes that, making things, at least in my opinion, far more natural (and less cluttered with <code>mysql_this()</code> and <code>mysql_that()</code>). Take these examples:</p>
+<div class="pygments_tango"><pre><span class="cp">&lt;?php</span>
+
+<p><span class="c1">// Connecting to a MySQL DB the procedural way</span>
+<span class="nv">$host</span> <span class="o">=</span> <span class="s1">&#39;somehost&#39;</span><span class="p">;</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="s1">&#39;user&#39;</span><span class="p">;</span>
+<span class="nv">$pass</span> <span class="o">=</span> <span class="s1">&#39;password&#39;</span><span class="p">;</span>
+<span class="nv">$db</span> <span class="o">=</span> <span class="s1">&#39;somedb&#39;</span><span class="p">;</span></p>
+<p><span class="nv">$connection</span> <span class="o">=</span> <span class="nb">mysql_connect</span><span class="p">(</span><span class="nv">$host</span><span class="p">,</span> <span class="nv">$user</span><span class="p">,</span> <span class="nv">$pass</span><span class="p">);</span>
+<span class="nb">mysql_select_db</span><span class="p">(</span><span class="nv">$db</span><span class="p">);</span> <span class="c1">// With no second argument, PHP just infers that I&#39;m using $connection</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nb">mysql_query</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM symbols&#39;</span><span class="p">);</span> <span class="c1">// again, PHP just assumes it&#39;s $connection</span>
+<span class="cm">/<em> Now I pass $result to a billion functions to do something with it. All in all, it&#39;s really inconsistent</span>
+<span class="cm">and counter intuitive for anyone who realizes that connections are best represented as objects </em>/</span></p>
+<p><span class="nb">mysql_close</span><span class="p">(</span><span class="nv">$connection</span><span class="p">);</span> <span class="c1">// The last nail in the coffin</span></p>
+<p><span class="cp">?&gt;</span><span class="x"></span>
+</pre></div></p>
+<p>Compare this to using <code>mysqli</code>:</p>
+<?php
+// Using a MySQL DB, the OO way
+
+<p>$connection = new mysqli($host, $user, $pass, $db); // Simple object construction
+$result = $connection-&gt;query('SELECT * FROM SYMBOLS');
+/<em> Now we use $result as an object, too! How about that. No ambiguity, no repetition, just
+beautiful, object-oriented code. </em>/
+$connection-&gt;close();
+?&gt;
+$$/code</p>
+<p>I hope that at some point PHP breaks compatibility to do what <code>mysqli</code> did to <code>mysql</code> for the rest of the language. Some things deserve to be objects, and a lot of the problems of PHP can be fixed in the process (inconsistent naming, excessive verbosity, ambiguity). Maybe I'm just trying to code Python in PHP, but that wouldn't be so bad, would it?</p>
+
+  </div>
+</div>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_url = "http://www.rafekettler.com/blog/2010/12/15/why-php-throws-me";
+</script>
+<script type="text/javascript" src="http://disqus.com/forums/rafekettler.com/embed.js"></script>
+<noscript><a href="http://rafekettler.com.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        </div><!-- End Prose Block -->
+      </div><!-- End Main Block -->
+      <div id="footer">
+        
+  <hr/>
+  <p id="credits">
+Copyright &copy; Rafe Kettler, 2010-11<br/>
+Powered by <a href="http://www.blogofile.com">Blogofile</a>.<br/>
+RSS feeds for <a href="/blog/feed">Entries</a>
+ and <a
+href="http://rafekettler.com.disqus.com/latest.rss">Comments</a>.
+<br>
+</p>
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/rafekettler.com/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+//]]>
+</script>
+
+
+      </div> <!-- End Footer -->
+    </div> <!-- End Content -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

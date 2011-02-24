@@ -1,0 +1,49 @@
+---
+categories: Magic Method Monday, Python
+date: 2010/11/29 06:14:42
+guid: http://rafekettler.com/?p=75
+tags: Python links, functional-programming, Magic-Method-Monday, OOP
+title: 'Magic Method Monday: __call__()'
+---
+Busy week, so only one magic method this Monday. This one's a bit strange, but a useful feature of Python nonetheless. Today, we look at `__call__()`, which defines behavior when an instance of a class is called.
+
+`__call__()`
+
+Defines behavior when an instance of a class is called, e.g.
+
+$$code(lang=python)
+x = MyClass()
+x()
+$$/code
+
+`__call__()` takes the parameters `self` and anything else you'd like it to take.
+
+**Example**
+
+Here's an example that adds functionality to Tkinter callbacks, which are useful but can't take arguments (which is something you'd often like them to take):
+
+$$code(lang=python)
+class Callback:
+        
+    def __init__(self, callback, *args, **kw):
+        self.callback = callback
+        self.args = args
+        self.kw = kw
+    
+    def __call__(self):
+        return self.callback(*self.args, **self.kw)
+$$/code
+
+What this accomplished is it allows us to create instances for particular callbacks, and pass them arguments despite Tkinter's limitations. Normally, we'd do this:
+
+$$code(lang=python)
+button = Tkinter.Button(root, text="Button", cmd=callback)
+$$/code
+
+But now we can do this:
+
+$$code(lang=python)
+button = Tkinter.Button(root, text="Button", cmd=Callback(callback, *args, **kw))
+$$/code
+
+It may not seem like much, but if you work with Tkinter a lot, you know how much frustration this can avoid.

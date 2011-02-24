@@ -1,0 +1,10 @@
+---
+categories: Computer science
+date: 2010/12/17 03:44:10
+guid: http://rafekettler.com/?p=183
+tags: computer-science, math
+title: 'Who knew: the Egyptians did math the way computers do it'
+---
+I saw an excellent video on how the Egyptian system of math is base-2, which also forms the basis for today's computers. It's an interesting tribute to the role math has played in inventing the computer (Church, Turing, Von Neumann, and others, were mathematicians, not computer scientists, after all), and it's also a nifty explanation of how multiplication and division operators work in modern processors.
+
+<iframe title="YouTube video player" class="youtube-player" type="text/html" width="480" height="390" src="http://www.youtube.com/embed/Ih1ZWE3pe9o" frameborder="0"></iframe>

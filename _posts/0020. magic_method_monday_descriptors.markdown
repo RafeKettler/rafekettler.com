@@ -1,0 +1,50 @@
+---
+categories: Magic Method Monday, Python, Programming
+date: 2010/12/13 04:19:15
+guid: http://rafekettler.com/?p=165
+tags: Python links, Magic-Method-Monday, OOP, programming
+title: 'Magic Method Monday: Descriptors'
+---
+Descriptors are classes which, when accessed through either getting, setting, or deleting, can also alter other objects. Descriptors aren't meant to stand alone; rather, they're meant to be held by an owner class. Descriptors can be useful when building object-oriented databases or classes that have attributes whose values are dependent on each other.
+
+To be a descriptor, a class must have at least one of `__get__`, `__set__`, and `__delete__` implemented. Let's take a look at those magic methods:
+
+`__get__`
+
+`__get__` defines behavior for when the descriptor's value is retrieved. `__get__` takes three arguments: `self`, the instance of the owner class (`instance`), and the owner class itself (`owner`).
+
+`__set__`
+
+`__set__`
+
+`__set__` gets called when the value of the descriptor is changed. It takes three arguments also: `self`, the instance of the owner class, and the value to set the descriptor to.
+
+`__delete__`
+
+`__delete__` gets called when the descriptor (or the instance of the owner) is deleted (either through garbage collection or a `del` statement), and it takes `self` and the instance of the owner class.
+
+**Example**
+
+If one were defining a class to represent distance (or any other measurement), it might be useful to have multiple units of measurement represented. An example could look like this:
+
+$$code(lang=python)
+class Meter(object):
+    def __init__(self, value=0.0):
+        self.value = float(value)
+    def __get__(self, instance, owner):
+        return self.value
+    def __set__(self, instance, value):
+        self.value = float(value)
+    
+class Foot(object):
+    def __get__(self, instance, owner):
+        return instance.meter / .3048
+    def __set__(self, instance, value):
+        instance.meter = float(value) * 3.2808
+    
+class Distance(object):
+    meter = Meter()
+    foot = Foot()
+$$/code
+ 
+In this case, `Meter` and `Foot` are descriptors, and `Distance` is the owner class. Descriptors are useful because they can tie values and other aspects of their state to other descriptors, making them an excellent way to simply and beautify code. Without descriptors in this example, the implementation of the conversions would have to be contained in `Distance`, which would not only bloat the class definition for `Distance`, but make `Foot` and `Meter` specific to `Distance`. By defining `__get__`, `__set__`, and `__delete__`, however, we can reuse `Foot` and `Meter` in any class that has some attribute for distance. All in all, it's a great way to write reusable, effortless code that can add functionality and beauty to classes that hold them.

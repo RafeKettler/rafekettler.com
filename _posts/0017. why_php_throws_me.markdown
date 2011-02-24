@@ -1,0 +1,49 @@
+---
+categories: PHP, Programming
+date: 2010/12/15 17:52:08
+guid: http://rafekettler.com/?p=179
+tags: programming, PHP
+title: Why PHP Throws Me
+---
+After learning PHP for a few weeks, it was very disorienting. It had no right to be -- I'm familiar with C-style syntax and I program in dynamically typed, interpreted languages all the time (though the $ sigils before variables make me a bit dizzy). All the syntax -- functions, classes, control flow -- either remind me of C, Java, or Python. The thing that throws most people -- the _wild_ inconsistency in naming conventions -- confuses me a bit, but I've basically gotten over it. Even the lack of a real sense of scope (I don't have to do anything to use a MySQL function, I just use it, same with the rest of the standard library, AFAIK) was possible to overcome.
+
+I figured out what really bothers me about it --  it subverts my expectations for programming style. I'm used to doing some things with objects and others procedurally. PHP doesn't -- it seems like many things are procedural when they have no right to be, and it makes the language look like a mess.
+
+I think the design choice that Python really got right (along with a few other languages) is making some basic types as well as much of the standard library object-oriented. Where Python has list methods, PHP has 50+ functions that operate on arrays procedurally. What is `last_elem = some_list.pop()` in Python becomes `$last_elem = array_pop($some_list)` in PHP. My preference towards the Python style is probably just my upbringing -- but I don't see why, in a dynamically-typed language, I have to constantly type `array_this()` and `array_that()` to operate on arrays.
+
+I suppose this has its roots in PHP's heritage -- it didn't start out object-oriented, so in an attempt to not break compatibility, the procedural relics were kept. But even as much as I admonish "There's More Than One Way To Do It", you'd think by now they'd have at least made it so you could operate on strings and arrays using methods. This is why I like where PHP 5 is going (or has been going) -- things that for really no good reason used to be procedural are now object-oriented. When working with the `mysql` extension, I feel like I'm programming in C, passing around an object from function to function (except in some cases, this can be implicit, which also irks me). But `mysqli` fixes that, making things, at least in my opinion, far more natural (and less cluttered with `mysql_this()` and `mysql_that()`). Take these examples:
+
+$$code(lang=php)
+<?php
+    
+// Connecting to a MySQL DB the procedural way
+$host = 'somehost';
+$user = 'user';
+$pass = 'password';
+$db = 'somedb';
+    
+$connection = mysql_connect($host, $user, $pass);
+mysql_select_db($db); // With no second argument, PHP just infers that I'm using $connection
+$result = mysql_query('SELECT * FROM symbols'); // again, PHP just assumes it's $connection
+/* Now I pass $result to a billion functions to do something with it. All in all, it's really inconsistent
+and counter intuitive for anyone who realizes that connections are best represented as objects */
+
+mysql_close($connection); // The last nail in the coffin
+
+?>
+$$/code
+
+Compare this to using `mysqli`:
+
+<?php
+// Using a MySQL DB, the OO way
+    
+$connection = new mysqli($host, $user, $pass, $db); // Simple object construction
+$result = $connection->query('SELECT * FROM SYMBOLS');
+/* Now we use $result as an object, too! How about that. No ambiguity, no repetition, just
+beautiful, object-oriented code. */
+$connection->close();
+?>
+$$/code
+
+I hope that at some point PHP breaks compatibility to do what `mysqli` did to `mysql` for the rest of the language. Some things deserve to be objects, and a lot of the problems of PHP can be fixed in the process (inconsistent naming, excessive verbosity, ambiguity). Maybe I'm just trying to code Python in PHP, but that wouldn't be so bad, would it?

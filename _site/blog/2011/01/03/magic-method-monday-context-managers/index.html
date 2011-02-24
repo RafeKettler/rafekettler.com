@@ -1,0 +1,122 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    
+  <title>rafekettler.com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/blog/feed" />
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0"
+href="/blog/feed/atom" />
+<link rel='stylesheet' href='/css/pygments_tango.css' type='text/css' />
+<link rel='stylesheet' href='/css/site.css' type='text/css' />
+
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <h1><a href="/">rafekettler.com</a></h1>
+<h3>My thoughts on programming and technology</h3>
+<nav>
+<ul>
+<li><a href="/blog">Blog</a></li>
+<li><a href="/about.html">About me</a></li>
+<li><a href="/magicmethods.html">Magic Methods Guide</a></li>
+</ul>
+</nav>
+<hr/>
+
+
+      <div id="main_block">
+        <div id="prose_block">
+          
+
+<div class="blog_post">
+  <a name="magic-method-monday-context-managers"></a>
+  <h2 class="blog_post_title"><a href="/blog/2011/01/03/magic-method-monday-context-managers" rel="bookmark" title="Permanent Link to Magic Method Monday: Context Managers">Magic Method Monday: Context Managers</a></h2>
+  <p><small>01.03.2011 at 05:25 AM in 
+
+<a href='/blog/category/python'>Python</a>, <a href='/blog/category/programming'>Programming</a>, <a href='/blog/category/magic-method-monday'>Magic Method Monday</a>
+ | <a href="http://www.rafekettler.com/blog/2011/01/03/magic-method-monday-context-managers#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  <p>In Python 2.5, a new keyword was introduced in Python along with a new method for code reuse, the <code>with</code> statement. The concept of context managers was hardly new in Python (it was implemented before as a part of the library, I believe), but not until <a href="http://www.python.org/dev/peps/pep-0343/">PEP 343</a> was accepted did it achieve status as a first class language construct. Usage for the <code>with</code> statement is simple:</p>
+<div class="pygments_tango"><pre><span class="k">with</span> <span class="n">A</span><span class="p">()</span> <span class="k">as</span> <span class="n">a</span><span class="p">:</span>
+    <span class="c"># do something</span>
+</pre></div>
+
+<p>You're probably wondering what the point of all of this is. It might look innocuous at first, but there's some magic going on behind the scenes (and, as always with Python, you can take control of that magic for yourself).</p>
+<p><code>__enter__</code></p>
+<p>Defines what the context manager (the <code>with</code> statement) should do at the beginning of the block. It takes the argument <code>self</code>. Whatever it returns get bound to the <em>target</em> in the <code>with</code> statement (the name after <code>as</code>), so you could in fact use <code>__enter__</code> to create a completely new object altogether (if you'd like).</p>
+<p><code>__exit__</code></p>
+<p>Gets loaded at the start of the block and executed after the block. It can commonly be used to handle exceptions, perform cleanup (closing a file or connection), or do something that is always done immediately after we're finished with an object. Unlike <code>__enter__</code>, <code>__exit__</code> takes several arguments, <code>self</code>, <code>exception_type</code>, <code>exception_value</code>, and <code>traceback</code>. If there's no exception, the last 3 arguments will be <code>None</code>. Otherwise, you can either choose to handle the exception or let it get handled by the user; if you want to handle it, make sure <code>__exit__</code> returns <code>True</code> after all is said and done. Otherwise, let the exception happen.</p>
+
+  </div>
+</div>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_url = "http://www.rafekettler.com/blog/2011/01/03/magic-method-monday-context-managers";
+</script>
+<script type="text/javascript" src="http://disqus.com/forums/rafekettler.com/embed.js"></script>
+<noscript><a href="http://rafekettler.com.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        </div><!-- End Prose Block -->
+      </div><!-- End Main Block -->
+      <div id="footer">
+        
+  <hr/>
+  <p id="credits">
+Copyright &copy; Rafe Kettler, 2010-11<br/>
+Powered by <a href="http://www.blogofile.com">Blogofile</a>.<br/>
+RSS feeds for <a href="/blog/feed">Entries</a>
+ and <a
+href="http://rafekettler.com.disqus.com/latest.rss">Comments</a>.
+<br>
+</p>
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/rafekettler.com/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+//]]>
+</script>
+
+
+      </div> <!-- End Footer -->
+    </div> <!-- End Content -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

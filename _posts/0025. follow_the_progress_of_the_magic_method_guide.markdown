@@ -1,0 +1,10 @@
+---
+categories: Python, Programming
+date: 2011/01/06 23:35:28
+guid: http://rafekettler.com/?p=252
+tags: Python links, OOP, programming
+title: Follow the progress of the magic method guide
+---
+I've uploaded a draft of the first few parts of the magic method guide. You can look at it [here](http://www.rafekettler.com/magicmethods.html).
+
+Bear in mind, it's not nearly finished. I figured I'd post it in case someone wants to critique it, find some errors (I'm sure there will be some), or just follow the progress. Watch the version number as I add new content (I'm incrementing it by 1 each time I make a substantial addition, it'll be 1.0 by the time it's "content-complete").

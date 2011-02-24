@@ -1,0 +1,79 @@
+---
+categories: Python, Programming
+date: 2011/02/06 04:55:56
+guid: http://rafekettler.com/?p=283
+tags: Python links, functional-programming
+title: Functional Programming in Python on Trial
+---
+Anyone who's in the know about Python knows quite a bit about what Guido likes about Python and what he doesn't. Something that he's been very clear about for a number of years is that he doesn't like some of the functional programming constructs in Python. I'm talking about lambda expressions, `map()`, `filter()`, and `reduce()`. He said in 2005 (when he was first envisioning Python 3):
+
+>About 12 years ago, Python aquired lambda, reduce(), filter() and map(), courtesy of (I believe) a Lisp hacker who missed them and submitted working patches. But, despite the PR value, I think these features should be cut from Python 3000. 
+
+Ultimately, lambda, map, and filter stayed as builtins, and reduce got moved to functools. But why all the fuss? You might want to read [the BDFL's article on the matter](http://www.artima.com/weblogs/viewpost.jsp?thread=98196). For those who want a bit of a different perspective, read on.
+
+###Indictment###
+
+Arguably, the big problem with functional programming constructs like lambdas and map is that they are less readable than their counterparts. Most would argue that `[x for x in y if x > 2]` is more readable than `filter(lambda x: x > 2, y]`. I won't argue with that. But that's certainly an extreme example, isn't it? It just so happens that this example represents a case that works out very nicely in a list comprehension. In the spirit of due process, however, this and other affronts to readability serve as sufficient evidence to charge functional constructs in Python with a quite heinous crime in the Python userland: obfuscation.
+
+###On the charges against lambdas###
+
+First, lambda expressions. This is a feature that should not be used to produce any substantial routine. I think most of us can agree that this is evil:
+
+$$code(lang=python)
+x = lambda x, y: functioncall(x, 10) + functioncall(y, 5)
+$$/code
+
+This is bad for a number of reasons:
+
+ 1. No way to write a docstring
+ 2. No normal function declaration -- hangs up documentation tools, makes it hard to know that function x exists by reading the source
+ 3. One-liner (in the bad way) -- there's quite a bit going on for that one line of code
+
+Rather, it should always be written in its normal form, like so:
+
+$$code(lang=python)
+def x(a, b):
+    '''I provide useful info about the function for IDEs and docs generators.
+    I also am good for those reading source.'''
+    return functioncall(a, 10) + functioncall(b, 5)
+$$/code
+
+Wasn't that better? Clearly, lambda must be guilty of the crime of obfuscation.
+
+Now to sentencing: what should we do to lambda? Many would suggest to get rid of it. I say keep it. It might be obscure and unreadable in some cases, but it's a lifesaver in cases where you need to pass a very simple callback to a function. So, in the case of `lambda v. Python`, the judge finds the defendant guilty and orders him to be placed in house arrest, only to leave when used as a simple callback.
+
+### On the charges against map and filter ###
+
+map and filter face similar charges of obfuscation. Many would argue that powerful list comprehensions obviate the need for map and filter:
+
+$$code(lang=python)
+map(function, seq)
+function(x) for x in seq] # more clear, relies on more "standard" language constructs
+filter(function, seq)
+[x for  x in seq if function(x)] # likewise
+$$/code
+
+Personally, I don't find the map and filter implementations to be much less readable than their list comprehension counterparts. However, I also happen to like functional programming and I know a good bit about Python. Most people would have a hard time reading this, especially as complexity increases.
+
+Along the lines of "There should be one, and only one, obvious way to do it", map and filter are guilty of crowding Python with new solutions to problems that have already been solved. In the court of Python, this is an offense punishable by death. Because of this, in the case `map and filter v. Python`, the judge finds the defendants guilty and sentences them to death. The defendants should be promptly removed from the standard library, and should only leave their places on death row for code golf competitions.
+
+### reduce ###
+
+reduce is a fold operation, if you're familiar with other functional languages you should get this. It's a recursive concept and a common idiom in functional programming that many languages encapsulated in a higher order function (as they should have). However, Python is not a very recursive language. To demonstrate to the court why reduce is guilty, take a look at this example.
+
+$$code(lang=python)
+x = reduce(lambda x, y: x * y, seq) # what is this i don't even
+        
+# equivalent in human speak
+product = 1
+for x in seq:
+     product *= seq # oh, we're just finding the product of a sequence
+$$/code
+
+GUILTY! In this case reduce only serves to dramatically reduce(geddit) the amount of code written at the expense of any clarity. This is a simple example and is, admittedly, quite understandable and simple for anyone who has used reduce  (or fold in another language). However, as code grows in complexity, loops are almost always more clear. So, in the case of `reduce v. Python`, the judge finds the defendant not only guilty of obfuscation and lack of necessity, but also guilty of pure evil. For that, reduce meets the gallows (as it essentially has in Python 3).
+
+###Syllabus (AKA tl;dr)###
+
+`lambda` is only acceptable in a few restricted situations. `map`, `filter`, and `reduce` need to leave the Python language because they are unnecessary and they quickly grow unwieldy and unreadable as their complexity increases.
+
+I accept functional programming as a good idea in general (what would we do without closures and first-class functions, after all), but some parts of Python are relics of Lisp hackers before us and don't really fit in with the language philosophy. Because of this, I'll take Guido's side: I don't like most of the functional programming stuff mixed into Python's global namespace and syntax. I don't mind having a module for it (`functools` is useful, and when you import it it's a clear statement of intent), in fact, I happen to like that module. But in general, higher-order functions and lambdas need to be relegated to a lower place in the language.

@@ -1,0 +1,58 @@
+---
+categories: Magic Method Monday, Python
+date: 2010/11/15 03:03:23
+guid: http://rafekettler.com/?p=58
+tags: Python links, Magic-Method-Monday, OOP
+title: 'Magic Method Monday: Comparisons'
+---
+Python has incredibly strong support for operator overloading in user-defined types and classes. Using the magic methods that define custom behavior for comparing objects, we can create our own full featured types that feature sleek comparisons using normal operators.
+
+`__eq__
+
+Defines custom behavior for the `==` operator. Takes arguments self and other.
+
+`__lt__`
+
+Defines custom behavior for the `<` operator.
+
+`__gt__`
+
+Defines custom behavior for the `>` operator.
+
+`__le__`
+
+Defines custom behavior for the `<=` operator.
+
+`__ge__`
+
+Defines custom behavior for the `>;=` operator.
+
+`__ne__`
+
+Defines custom behavior for the `!=` operator.
+
+`Comparison magic methods in action`
+
+By using these magic methods, we can implement a class that overloads the comparison operators. Here's a class that compares based on the sum of it's list of values:
+
+$$code(lang=python)
+class SumCompare:
+
+     # Class that defines comparisons based on the sum of it's value list
+     def __init__(self, values):
+        self.values = values
+
+     def __eq__(self, other):
+        try:
+            return sum(self.values) == sum(other)
+        except TypeError: # if other isn't an iterable or can't be summed
+            return None
+
+     def __lt__(self, other):
+        try:
+            return sum(self.values) < sum(other)
+        except TypeError:
+             return None
+
+     ...snip...
+$$/code

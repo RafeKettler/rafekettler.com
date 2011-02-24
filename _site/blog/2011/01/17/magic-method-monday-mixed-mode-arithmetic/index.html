@@ -1,0 +1,117 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    
+  <title>rafekettler.com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/blog/feed" />
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0"
+href="/blog/feed/atom" />
+<link rel='stylesheet' href='/css/pygments_tango.css' type='text/css' />
+<link rel='stylesheet' href='/css/site.css' type='text/css' />
+
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <h1><a href="/">rafekettler.com</a></h1>
+<h3>My thoughts on programming and technology</h3>
+<nav>
+<ul>
+<li><a href="/blog">Blog</a></li>
+<li><a href="/about.html">About me</a></li>
+<li><a href="/magicmethods.html">Magic Methods Guide</a></li>
+</ul>
+</nav>
+<hr/>
+
+
+      <div id="main_block">
+        <div id="prose_block">
+          
+
+<div class="blog_post">
+  <a name="magic-method-monday-mixed-mode-arithmetic"></a>
+  <h2 class="blog_post_title"><a href="/blog/2011/01/17/magic-method-monday-mixed-mode-arithmetic" rel="bookmark" title="Permanent Link to Magic Method Monday: Mixed Mode Arithmetic">Magic Method Monday: Mixed Mode Arithmetic</a></h2>
+  <p><small>01.17.2011 at 05:11 PM in 
+
+<a href='/blog/category/python'>Python</a>, <a href='/blog/category/programming'>Programming</a>, <a href='/blog/category/magic-method-monday'>Magic Method Monday</a>
+ | <a href="http://www.rafekettler.com/blog/2011/01/17/magic-method-monday-mixed-mode-arithmetic#disqus_thread">View Comments</a>
+</small></p>
+  <div class="post_prose">
+    
+  <p>This may very well be the last magic methods blog post, and it's fitting that I'll be addressing a method that I initially overlooked.</p>
+<p>Python would be very hard to use without mixed-mode arithmetic: imagine what Python would be like if a type-conversion was necessary to add an integer to a float. In order to make our classes behave the same way, we can define a <code>__coerce__</code> method.</p>
+<p><code>__coerce__</code></p>
+<p>Method to implement mixed mode arithmetic. Takes arguments <code>self</code> and <code>other</code>. Should return <code>None</code> if type conversion is impossible. Otherwise, it should return a pair (2-tuple) of self and other, manipulated to have the same type.</p>
+<p>That's all for now; it seems that I'll have to find another weekly series to tackle. Keep watching the magic methods guide <a href="http://www.rafekettler.com/magicmethods.html">here</a>.</p>
+
+  </div>
+</div>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_url = "http://www.rafekettler.com/blog/2011/01/17/magic-method-monday-mixed-mode-arithmetic";
+</script>
+<script type="text/javascript" src="http://disqus.com/forums/rafekettler.com/embed.js"></script>
+<noscript><a href="http://rafekettler.com.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        </div><!-- End Prose Block -->
+      </div><!-- End Main Block -->
+      <div id="footer">
+        
+  <hr/>
+  <p id="credits">
+Copyright &copy; Rafe Kettler, 2010-11<br/>
+Powered by <a href="http://www.blogofile.com">Blogofile</a>.<br/>
+RSS feeds for <a href="/blog/feed">Entries</a>
+ and <a
+href="http://rafekettler.com.disqus.com/latest.rss">Comments</a>.
+<br>
+</p>
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/rafekettler.com/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+//]]>
+</script>
+
+
+      </div> <!-- End Footer -->
+    </div> <!-- End Content -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

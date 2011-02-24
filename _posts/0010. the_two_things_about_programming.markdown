@@ -1,0 +1,21 @@
+---
+categories: Programming
+date: 2010/11/14 21:10:06
+guid: http://rafekettler.com/?p=62
+tags: ''
+title: The Two Things About Programming
+---
+I Stumbled Upon this [article on The Fishbowl](http://fishbowl.pastiche.org/2007/04/15/the_two_things_about_computer_programming/) and thought it deserved a reblog. Essentially, it gives the "Two Things" that you need to know to program and design software. Here's the short:
+
+
+> Computer Programming:
+
+>    1. Every problem can be solved by breaking it up into a series of smaller problems.
+>    2. The computer will always do exactly what you tell it to.
+
+> Software Engineering:
+
+>    1. Writing the code is the easy part. Writing it so someone else can understand it later is the important part.
+>    2. Make it work, then make it elegant, then make it fast.
+
+If you want to read the whole thing, head on over to http://fishbowl.pastiche.org/2007/04/15/the_two_things_about_computer_programming .

@@ -1,0 +1,39 @@
+---
+categories: Uncategorized
+date: 2010/12/06 17:29:03
+guid: http://rafekettler.com/?p=154
+tags: ''
+title: 'Magic Method Monday: custom attribute access'
+---
+We've been a long way through Magic Method Monday, and now it's time to get to some of the more advance magic methods. Today, it's `__getattr__`, `__setattr__`, `__delattr__`, and `__getattribute__`.
+
+`__getattr__`
+
+`__getattr__` defines behavior when an attribute that doesn't exist (either yet or at all) is accessed. It takes the arguments `self` and `name`, where `name` is the name of the attribute that is being accessed. It's essentially a way to define behavior for "attribute not found", and according to the documentation, it can go two ways: either compute an attribute, or raise an AttributeError.
+
+`__setattr__`
+
+`__setattr__`, though it may seem related to `__getattr__`, behaves very differently. `__setattr__` defines behavior whenever an attribute of a class is assigned to. It takes the arguments `self`, `name` where `name` is the name of the attribute, and `value`. Note that some special behavior must be taken when defining `__setattr__`:
+
+$$code(lang=python)
+# wrong way to use __setattr__
+def __setattr__(self, name, value):
+    self.name = value
+    # since every time an attribute is assigned, __setattr__() is called, this
+    # is recursion.
+    # so this really means self.__setattr__(name, value). Since the method
+    # keeps calling itself, the recursion goes on forever causing a crash
+
+# the right way to do it
+def __setattr__(self, name, value):
+    self.__dict__[name] = value # assigning to the dict of names in the class
+    # define custom behavior here
+$$/code
+
+`__delattr__`
+
+You should already know what it does. `__delattr__` takes arguments `self` and `name` and defines custom behavior for when an attribute is deleted.
+
+`__getattribute__`
+
+You want to define behavior for every time a function is accessed? Well, you're in luck. You can use this (only in new-style classes, mind you, which you can get by placing `__metaclass__ = type` at the top of the script, or by subclassing `object` or another new-style class). It takes arguments `self` and `name`, and it can be quite useful (though it must be used with care, as it can also cause infinite recursion).  It's best that you read [the documentation for __getattribute__()](http://docs.python.org/reference/datamodel.html#object.__getattribute__) yourself to get an idea of what to do and what not to do.

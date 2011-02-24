@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+     >
+  <channel>
+    <title>rafekettler.com</title>
+    <link>http://www.rafekettler.com/blog</link>
+    <description>My thoughts on programming and technology</description>
+    <pubDate>Thu, 24 Feb 2011 21:49:55 GMT</pubDate>
+    <generator>Blogofile</generator>
+    <sy:updatePeriod>hourly</sy:updatePeriod>
+    <sy:updateFrequency>1</sy:updateFrequency>
+    <item>
+      <title>A Truly Great Python Fail</title>
+      <link>http://www.rafekettler.com/blog/2010/12/03/a-truly-great-python-fail</link>
+      <pubDate>Fri, 03 Dec 2010 06:01:01 EST</pubDate>
+      <category><![CDATA[Python]]></category>
+      <category><![CDATA[Humor]]></category>
+      <guid>http://rafekettler.com/?p=124</guid>
+      <description>A Truly Great Python Fail</description>
+      <content:encoded><![CDATA[<p>I saw this on <a href="http://www.stackoverflow.com">Stack Overflow</a>, and I almost soiled myself with how funny it is. Without any further adieu, here's the snippet:</p>
+<div class="pygments_tango"><pre><span class="k">def</span> <span class="nf">my_func</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="n">isn</span><span class="s">&#39;t None:</span>
+        <span class="c"># do something</span>
+</pre></div>
+
+<p>If <a href="http://www.thedailywtf.com">The Daily WTF</a> took Python code (it has almost <em>never</em> appeared on TDWTF), this would definitely make it, even though it's a simple mistake. Too classic.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Awesome Computer Science Band Name Ideas</title>
+      <link>http://www.rafekettler.com/blog/2010/11/10/awesome-computer-science-band-name-ideas</link>
+      <pubDate>Wed, 10 Nov 2010 04:02:05 EST</pubDate>
+      <category><![CDATA[Programming]]></category>
+      <category><![CDATA[Humor]]></category>
+      <guid>http://rafekettler.com/?p=52</guid>
+      <description>Awesome Computer Science Band Name Ideas</description>
+      <content:encoded><![CDATA[<p>For a bit of fun, I've come up with a few CS-term-based band names(some of these may be taken):</p>
+<ul>
+<li>Reverse Polish notation</li>
+<li>Brainfuck</li>
+<li>The Regular Expressions</li>
+<li>Map-Reduce</li>
+<li>The Generators (or the Iterators)</li>
+<li>Reduced Instruction Set Funk</li>
+<li>C# and F#</li>
+<li>Big-Endian</li>
+<li>Tux</li>
+</ul>
+<p>Nerd points if you know what all this is talking about. Did I miss something? Leave a comment.</p>]]></content:encoded>
+    </item>
+  </channel>
+</rss>

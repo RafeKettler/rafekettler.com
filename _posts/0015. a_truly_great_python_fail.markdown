@@ -1,0 +1,18 @@
+---
+categories: Humor, Python
+date: 2010/12/03 06:01:01
+guid: http://rafekettler.com/?p=124
+tags: ''
+title: A Truly Great Python Fail
+---
+I saw this on [Stack Overflow](http://www.stackoverflow.com), and I almost soiled myself with how funny it is. Without any further adieu, here's the snippet:
+
+$$code(lang=python)
+def my_func(name=None):
+    if name isn't None:
+        # do something
+$$/code
+    
+If [The Daily WTF](http://www.thedailywtf.com) took Python code (it has almost _never_ appeared on TDWTF), this would definitely make it, even though it's a simple mistake. Too classic.
+
+  

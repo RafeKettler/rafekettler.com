@@ -1,0 +1,21 @@
+---
+categories: Magic Method Monday, Python, Programming
+date: 2011/01/10 17:18:43
+guid: http://rafekettler.com/?p=256
+tags: Magic-Method-Monday, OOP, programming
+title: 'Magic Method Monday: Unicode and Nonzero'
+---
+We're nearing the end of the magic methods blog post series (and the beginning of the magic methods guide, which will be better organized, better explained, better demonstrated, and all in one place!). Thus, I'm running out of magic methods to work with. Here we head back to a few magic methods that I ignored (or forgot): `__unicode__` and `__nonzero__`.
+
+`__unicode__`
+
+Takes argument self. It returns a unicode string representation of the instance.
+
+`__nonzero__`
+
+Takes argument self and returns a boolean value, `True` or `False`. This method gets called when the `bool()` builtin is called on an instance, e.g.
+
+$$code(lang=python)
+if some_instance:
+    #do something
+$$/code

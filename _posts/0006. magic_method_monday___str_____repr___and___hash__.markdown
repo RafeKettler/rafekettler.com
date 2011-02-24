@@ -1,0 +1,70 @@
+---
+categories: Magic Method Monday, Python
+date: 2010/11/22 17:30:48
+guid: http://rafekettler.com/?p=68
+tags: Python links, Magic-Method-Monday, OOP, data-structures
+title: 'Magic Method Monday: __str__, __repr__, and __hash__'
+---
+One of the best parts about Python's magic methods is that they allow you to control exactly how built-in functions operate on custom objects. Today, we'll look at how to define custom behavior for the `str()`, `repr()`, and `hash()`. These functions are important parts of basic Python.
+
+**str(), repr(), and hash()**
+
+Very quickly, we'll look at what these functions do. str() returns a nicely printable version of an object, repr() returns a more detailed representation of an object, more suitable for debugging (that is always a valid Python expression), and hash() is able to return a hash value for certain data types (e.g. characters, strings, integers, floats). An example session with the interpreter:
+
+$$code(lang=pythonconsole)
+>>> str('a')
+'a'
+>>> repr('a')
+"'a'"
+>>> hash('a')
+-468864544
+$$/code
+
+`__str__`
+
+Defines custom behavior when str() is called on an object. It takes the argument self and returns a string.
+
+`__repr__`
+
+Defines custom behavior when repr() is called on an object. It takes the argument self and returns a string. The returned value, if possible, should be a valid Python expression that could be used to reproduce the object.
+
+`__hash__`
+
+Defines how Python behaves when hash() is called on an object. This can be particularly useful for creating dictionaries and other mappings. It takes arguments self and returns an integer hash value. By default, the hash() function isn't particularly good, because it allows for collisions (`hash(1)` and `hash(1.0)` will return the same values).
+
+**In action: a useful example, finally**
+
+Usually when I give examples for Magic Method Monday, they're so abstract or silly as to be completely useless. But today, I've come up with an example class that actually might have some use: a hashable integer.
+
+$$code(lang=python)
+class HashableInt(int):
+    # An int with a non-colliding hash function   
+    hashvalue = 0
+    def __init__(self, value=0):
+        self.value = value
+        self.hashvalue = HashableInt.hashvalue
+        HashableInt.hashvalue += 1
+
+    def __str__(self):
+        return "Hashable int %i with hash %i" % (self.value, self.hashvalue)
+
+    def __repr__(self):
+        return "<HashableInt %i with hash %i>" % (self.value, self.hashvalue)
+
+    def __hash__(self):
+        return self.hashvalue
+$$/code
+
+Here's how this would play out:
+
+$$code(lang=pythonconsole)
+>>> x = HashableInt(10)
+>>> str(x)
+'Hashable int 10 with hash 0'
+>>> repr(x)
+'<HashableInt 10 with hash 0>'
+>>> hash(x)
+0
+>>> y = HashableInt(10)
+>>> hash(y)
+1

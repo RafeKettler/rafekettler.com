@@ -1,0 +1,12 @@
+---
+categories: Uncategorized
+date: 2010/08/09 21:33:26
+guid: http://rafekettler.com/?p=1
+tags: ''
+title: Hello world!
+---
+I'm hard at work getting the blog up and running. Thanks for the patience.
+
+$$code(lang=python)
+print "Hello world!"
+$$/code

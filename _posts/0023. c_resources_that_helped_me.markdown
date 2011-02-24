@@ -1,0 +1,18 @@
+---
+categories: Uncategorized
+date: 2011/02/18 04:17:37
+guid: http://rafekettler.com/?p=301
+tags: ''
+title: C resources that helped me
+---
+I've been picking up C a bit more lately, and it's been great so far. Along the way, I've picked up some great articles, books, and sites. I thought I'd post them for posterity and the convenience of anyone who might happen on this.
+
+ - [The Essential C, by Nick Parlante](http://cslibrary.stanford.edu/101/EssentialC.pdf) -- This is really a must for anyone who wants to relearn C or an experienced programmer who want a primer. It's only 50 pages, and it's quick and to the point. It's something that you could read and comprehend in a day if you wanted to. It's also very thorough -- most of the major language concepts see some coverage.
+ - [K&R C, by Kernighan and Ritchie](http://www.amazon.com/Programming-Language-2nd-Brian-Kernighan/dp/0131103628) -- no C programmer would be complete without it. If you have to ask, you shouldn't be using C.
+ - [comp.lang.c FAQ](http://c-faq.com/) -- it's a great FAQ. Quite thorough. Even if you don't have a specific question, it's very educational to peruse: you can pick up nice bits and pieces of advice along the way.
+ - [High and Low Level C by Jim Larson](http://www.jetcafe.org/jim/highlowc.html) -- sort of a guide to doing things in C that it wasn't really designed to do (closures, classes, GC), and sort of a guide to low level hacks. It's a good overview of some cool hacks in C that can come in handy for the advanced C coder.
+ - [The ISO C standard](http://www.open-std.org/JTC1/SC22/WG14/) -- again, if you have to ask...
+ - [The GCC manual](http://gcc.gnu.org/onlinedocs/gcc-4.5.2/gcc.pdf) -- everyone's favorite C compiler has quite a few options and quite a few associated tricks. Also, GNU C is, in many ways, a superset of C itself -- it allows a number of things that the standard does not (like nested functions). It's nice to know what those features are.
+ - [The FreeBSD handbook's section on secure programming](http://www.freebsd.org/doc/en_US.ISO8859-1/books/developers-handbook/secure.html) -- programming in C, especially with strings, can be dangerous. This is the most comprehensive guide to programming securely that I've found so far.
+
+If I come across any other good resources, I'll add them.

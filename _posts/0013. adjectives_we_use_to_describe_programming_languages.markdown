@@ -1,0 +1,48 @@
+---
+categories: Programming
+date: 2010/12/01 03:05:10
+guid: http://rafekettler.com/?p=78
+tags: programming
+title: Adjectives we use to describe programming languages
+---
+The programmer's vocabulary is a bit different from the average person, not just in the concepts, nouns, and verbs we use (e.g. closure, serialize), but also in the adjectives that we use. Partly for my amusement, partly for my own education, I've put together a list of some of the words that programmers use to describe their most important tools: the programming languages themselves.
+
+**Terse**
+
+A language is said to be terse if solutions to problems are generally very short. That doesn't necessarily imply that they are elegant, however. Terse can describe some languages (particularly languages like APL or Golfscript where most problems are solved with one liners), but many other languages merely lend themselves to writing terse solutions (e.g. Perl). Terse can mean good, but only if the solution a.) makes sense, and b.) is readily understood by the reader.
+
+**Verbose**
+
+Verbose is basically the opposite of terse. Languages are verbose if solutions to problems are long, and contain a good bit of repetition and boilerplate. Good examples of verbose languages include Java, C#, C++, and others. A verbose "Hello world" (we know that Java is verbose because this is the shortest way to do this):
+
+$$code(lang=java)    
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello world!");
+    }
+}
+$$/code
+
+**Expressive**
+
+Languages are more expressive if you can easily express your thoughts and intentions using that language's syntax. Languages that are expressive are languages where you can say what you want to do rather than describe the procedure. Consider the following C code:
+
+$$code(lang=c)    
+// Given an array of ints toSum
+int i;
+int sum = 0;
+for (i = 0; i < sizeof(toSum); i++)
+    sum += toSum[i];
+return sum;
+$$/code
+
+Now in Python:
+
+$$code(lang=python)
+sum(somelist)
+$$/code
+
+Clearly, Python is far more expressive than C. Rather than having to tell the computer what to do, we merely use a piece of syntax to succinctly express what we want.
+
+That's it for now, if I come up with any more or get any good suggestions, I'll post some more.
+ 

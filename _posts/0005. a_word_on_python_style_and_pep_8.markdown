@@ -1,0 +1,71 @@
+---
+categories: Python
+date: 2010/11/03 03:11:18
+guid: http://rafekettler.com/?p=30
+tags: Python links, Style
+title: A word on Python style and PEP 8
+---
+For those of you not familiar with the ins and outs of Python, the quintessential Python style guide is <a href="http://www.python.org/dev/peps/pep-0008/">Python Enhancement Proposal 8, or PEP 8</a> for short, a document handed down from Python's "Benevolent Dictator for Life" Guido van Rossum. It is the Talmud of Python programming, and anyone with a serious interest in Python ought to read it.
+However, I, like many others, don't think that PEP 8 is free from problem. So, I've decided to write some praise and criticism for what I feel are the most notable parts of PEP 8.
+
+**Layout**
+
+The very first advice offered regards spacing. Namely, 
+
+
+> Use 4 spaces per indentation level.
+
+And
+
+
+> Never mix tabs and spaces.
+
+This is perfectly agreeable, though it's importance has dwindled in the era where everyone and his brother has an IDE. Code should be indented consistently.
+There is some controversy over the guideline on line length. Namely, PEP 8 says:
+
+
+> Limit all lines to a maximum of 79 characters.
+
+I vocally disagree with this. In many cases, wrapping code to be less than 80 characters makes things less readably. Limiting the length of lines to 80 characters might have been relevant when displays could only show 80 lines, but in today's world where widescreen monitors are cheap and plentiful, it makes little sense. Consider the following code taken from a project of mine:
+
+$$code(lang=python)
+# Without PEP 8
+self.somefield.set(id, 'size', convert_size(getsize(join(path, item))))
+
+# With PEP 8
+self.someitem.set(id, 'size', convertsize(getsize(join(path, 
+                                                      item))))
+$$/code
+
+The first is obviously more readable. While I understand the abuse that having a limit to the length of a line is designed to counter, the "79 characters rule" is certainly one to be followed loosely.
+
+**Imports**
+
+The rules regarding imports in PEP 8 are mostly common sense, and designed to maximize clarity by cautioning against putting multiple imports on one line, specifying that imports should be made at the top of the module, and so on. One rule in PEP 8 that is rarely followed, but I think should be, is this:
+
+
+> Imports should be grouped in the following order:
+> 1. standard library imports
+> 2. related third party imports
+> 3. local application/library specific imports
+
+This rule definitely encourages clarity, but sadly, it is rarely followed.
+
+**Naming conventions**
+
+PEP 8 encourages a specific naming style for various items, such as CapWords for classes and lowercase for functions. Also, the PEP says:
+
+
+> Function names should be lowercase, with words separated by underscores as necessary to improve readability
+
+This is another part of the PEP that I feel is little understood and adhered to in all the wrong ways. There are two styles of getting this wrong: `nevereveruseunderscoresstyle()`, and `use_them_always_even_when_stupid_style()`. Like Guido said, use underscores when necessary to improve readability. Don't use them between every word in a function name.
+
+PEP 8 is a truly definitive style guide for the Python language, and Python is lucky to have something that most languages only dream of: clear style. However, like Jack Sparrow said, they're not rules, they're more like guidelines.
+
+
+
+
+
+
+
+
