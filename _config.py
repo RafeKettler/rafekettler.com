@@ -23,3 +23,6 @@ blog.post_excerpts.enabled = True
 blog.post_excerpts.word_length = 50
 blog.posts_per_page = 10
 filters.syntax_highlight.style = "tango"
+
+# Ignore patterns
+site.file_ignore_patterns.append(".*/README.*")

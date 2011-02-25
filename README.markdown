@@ -1,4 +1,4 @@
-My personal website. You can see the actual site at http://www.rafekettler.com. I built the site using blogofile to replace my existing Wordpress blog, but I haven't chosen to deploy it yet (writing CSS is hard).
+My personal website. You can see the actual site at [rafekettler.com](http://www.rafekettler.com). I built the site using blogofile to replace my existing Wordpress blog, but I haven't chosen to deploy it yet (writing CSS is hard).
 
 Any code snippets that are mine (marked as otherwise if that's the case) are MIT-licensed. My templates, controllers, filters, _config.py, and CSS are also covered under the MIT license. That license, for those of you who don't know, goes like this:
 
