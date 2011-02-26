@@ -19,7 +19,7 @@ blog.auto_permalink.path = "/:year/:month/:day/:title"
 
 # More advanced stuff
 blog.disqus.enabled = True
-blog.disqus.name = "rafekettler.com"
+blog.disqus.name = "rafekettler"
 blog.posts_per_page = 10
 filters.syntax_highlight.style = "tango"
 
