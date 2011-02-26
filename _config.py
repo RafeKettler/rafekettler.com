@@ -15,6 +15,7 @@ blog.path = "/blog"
 blog.name = "rafekettler.com"
 blog.description = "My thoughts on programming and technology"
 blog.timezone = "US/Eastern"
+blog.auto_permalink.path = "/:year/:month/:day/:title"
 
 # More advanced stuff
 blog.disqus.enabled = True
