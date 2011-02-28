@@ -9,7 +9,7 @@ It came to my attention that I left out a few magic methods when I covered seque
 
 `__reversed__`
 
-`__reversed` defines behavior for when you call `reversed()` on your sequence. Takes self.
+`__reversed__` defines behavior for when you call `reversed()` on your sequence. Takes self.
 
 `__contains__`
 

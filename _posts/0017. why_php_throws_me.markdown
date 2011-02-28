@@ -35,6 +35,7 @@ $$/code
 
 Compare this to using `mysqli`:
 
+$$code(lang=php)
 <?php
 // Using a MySQL DB, the OO way
     

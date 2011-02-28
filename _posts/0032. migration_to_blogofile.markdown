@@ -1,0 +1,24 @@
+---
+categories: Uncategorized
+date: 2011/02/26 12:45:00
+title: Migration to Blogofile
+---
+In case you couldn't tell, I'm not on Wordpress anymore. I've switched to [blogofile](http://www.blogofile.com). It's not so much that I dislike Wordpress, but Blogofile meets my needs really well:
+
+ - Markdown editing (and ReST, if I'm ever feeling *crazy*)
+ - Syntax highlighting out of the box
+ - Spam-proof comments from Disqus
+ - Static site (no pesky PHP)
+ - Written in Python, customized in Python
+ - Easily versioned using Git or some other VCS
+
+Basically, it's super awesome. My favorite piece is that it's static -- Wordpress was never responsive enough, and this is as responsive as it gets. With Wordpress, you also had to worry about caching, avoiding poor-performing plugins, and databases. All those troubles melt away with blogofile.
+
+That said, it's not perfect. Some cons:
+
+ - Usage is non-obvious and no non-nerd could ever effectively use it
+ - Documentation is no good. There's very little to read on blogofile in general, so to understand it you're going to have to read most of the source code in your controllers, filters, etc.
+ - Migrating from Wordpress on shared hosting is tough. There's a Python script that does the migration, but it has several dependencies (SQLAlchemy is the big one) that makes it unlikely to work on shared hosting (I'm fortunate enough to have limited shell access, still couldn't install SQLAlchemy, even from source). I ended up having to dump my MySQL DB, install and run MySQL on my computer, load the dump, and run the script from there. In the future, it should probably try to read Wordpress's XML dumps (I bet that would be pretty easy, maybe I'll do it myself).
+ - There are definitely some bugs, and it's definitely not "mature" technology (Wordpress really isn't either)
+
+Overall, I'm happy with my decision despite some of the hardships involved in the transfer. The coolest thing is that I can stay on $1 a month shared hosting *forever*.

@@ -27,13 +27,10 @@ Now, time for a (somewhat ridiculous) example. Say you wanted to implement a cla
 
 $$code(lang=python)
 from os.path import join
-
 class FileObject:
-    
     def __init__(self, filepath='/home/user_name', filename='sample.txt'):
         # open a file filename in filepath in read and write mode
         self.file = open(join(filepath, filename), 'rw')
-    
     def __del__(self):
         self.file.close()
         del self.file

@@ -24,12 +24,10 @@ Here's an example that adds functionality to Tkinter callbacks, which are useful
 
 $$code(lang=python)
 class Callback:
-        
     def __init__(self, callback, *args, **kw):
         self.callback = callback
         self.args = args
         self.kw = kw
-    
     def __call__(self):
         return self.callback(*self.args, **self.kw)
 $$/code

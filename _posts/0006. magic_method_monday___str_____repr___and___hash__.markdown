@@ -44,13 +44,10 @@ class HashableInt(int):
         self.value = value
         self.hashvalue = HashableInt.hashvalue
         HashableInt.hashvalue += 1
-
     def __str__(self):
         return "Hashable int %i with hash %i" % (self.value, self.hashvalue)
-
     def __repr__(self):
         return "<HashableInt %i with hash %i>" % (self.value, self.hashvalue)
-
     def __hash__(self):
         return self.hashvalue
 $$/code

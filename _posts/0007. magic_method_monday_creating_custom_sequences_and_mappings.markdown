@@ -56,27 +56,21 @@ whenever something happens to it:
 
 $$code(lang=python)
 class VocalList:
-        
     def __init__(self, values):
         self.values = values
         print "It's alive!!!"
-    
     def __len__(self):
         print "I'll stand still while you measure me."
         return len(self.values)
-    
     def __getitem__(self, key):
         print "Would you like fries with that item?"
         return self.values[key]
-    
     def __setitem__(self, key, value):
         print "I'll change for you."
         self.values[key] = value
-            
     def __delitem__(self, key):
         print "I'm MELTING"
         del self.values[key]
-    
     def __iter__(self):
         print "Iteration in 5, 4, 3..."
         # make self.values iterable...
@@ -121,13 +115,12 @@ behavior but keep all the list methods we know and love. Example:
 $$code(lang=python)
 class ProtectiveList(list):
     """A list that won't let its items be deleted on their own."""
-        
     def __init__(self, *args):
         # call the constructor for a list
         super(ProtectiveList, self).__init__(*args)
-        
     def __delitem__(self, key):
-        print "I will NOT allow that to happen."</pre>
+        print "I will NOT allow that to happen."
+$$/code
 
 Well, there you have it. The easy way (and the hard way) to define custom
 container objects in Python. Until next monday.
