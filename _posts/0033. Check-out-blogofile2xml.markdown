@@ -1,0 +1,13 @@
+---
+title: Check out wpxml2blogofile
+categories: Python, Blogofile
+tags: python, blogofile
+date: 2011/02/28 9:30:00
+---
+I said in [my last post](http://www.rafekettler.com/2011/02/26/migration-to-blogofile) that I had a tough time getting my Wordpress posts converted using the existing wordpress2blogofile script provided by the good people at [blogofile](http://www.blogofile.com).
+
+After the fact, I decided it was worth a few hours to actually write a script to convert Wordpress XML dumps to blogofile posts. It has [a GitHub repo where you can look at the code](http://www.github.com/RafeKettler/wpxml2blogofile). It may eventually end up in the blogofile repo too.
+
+As for the technical factors, I chose to write output as similar as possible to wordpress2blogofile as possible. The post naming conventions and the sequence of YAML metadata mimic what wordpress2xml does. I chose to use lxml for HTML parsing for a few reasons:
+
+ 1. It's a dependency for blogofile, so it's likely that the script will work for the user with no extra effort 
