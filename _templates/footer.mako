@@ -1,7 +1,7 @@
 <p id="credits">
 Copyright &copy; Rafe Kettler, 2010-11<br/>
 Powered by <a href="http://www.blogofile.com">Blogofile</a>.<br/>
-RSS feeds for <a href="${bf.util.site_path_helper(bf.config.blog.path,'feed')}">Entries</a>
+RSS feeds for <a href="feed">Entries</a>
 % if bf.config.blog.disqus.enabled:
  and <a
 href="http://${bf.config.blog.disqus.name}.disqus.com/latest.rss">Comments</a>.
