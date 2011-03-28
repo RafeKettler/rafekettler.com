@@ -20,8 +20,13 @@ ${", ".join(category_links)}
   <div class="post_prose">
     ${self.post_prose(post)}
   </div>
+  ${self.social_media()}
 </div>
 
 <%def name="post_prose(post)">
   ${post.content}
+</%def>
+<%def name="social_media()">
+  <script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 </%def>
