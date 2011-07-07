@@ -1,0 +1,78 @@
+---
+title: Why I Learned to Love Make
+date: 2011/07/7 12:00:00
+tags:
+categories: Software
+---
+I'll be honest -- I never really took the time to learn any formal build system until recently. I hadn't worked on many major projects and at my job, there were only a few people working on any project, so there was no reason to learn anything fancy like Make or Maven. I just wrote shell scripts and that worked fine. But now that I've looked into Make, it doesn't seem like I'll ever go back to plain shell scripts.
+
+In this post, I'm going to take a look at a few things that make Make infinitely better than the primitive way of doing things -- shell scripts or manually, and why Make has improved my life.
+
+## My initial apprehensions ##
+
+I had a long list of reasons why I'd never tried learning Make before. Here's a fairly comprehensive version:
+
+ * I figured my projects were too small to require a specialized build system or dependency tracking
+ * I though shell scripts were just okay
+ * I like writing bash scripts (Make is actually very similar to writing bash scripts, but with some domain-specific abstraction)
+ * I'd heard a lot of disrespect for Make as a system and a language
+ * I didn't need to work on any existing Makefiles
+
+Nevertheless, I gave it a try when I had some free time, and it was a cathartic experience. Outlined throughout the rest of the article are a few reasons why I'll never go back to writing scripts in places where Make is king.
+
+## Argument parsing ##
+
+Most of the time, when I first write a shell script to build a project, it starts off as a very simple, linear script. But then, I need to do something else (e.g. generate just one file, or generate a different distribution format, or make a patch), and the script starts to branch. Now, I have to start writing branches on the script to take different actions with different _verbs_ or _commands_ (e.g. installer, executable, and so on). I also have to introduce some additional complexity due to error handling -- I want to gracefully handle cases when the given verb is not a recognized command for the script. Basically, it gets very complicated fast.
+
+In a general-purpose language like Python, there's libraries to abstract over this and make things easier (e.g. argparse or optparse). But bash has no such functionality built in. Enter Make: Make does all of the argument parsing for you. You just have to define *targets* and error reporting and branching is handled for you. Here's a comparison (note that this makefile is not valid -- I had a tough time formatting tabs, so I used 8 spaces instead):
+
+$$code(lang=shell)
+# Command should be either update or installer
+command=$1
+
+if [ $command = 'installer' ]; then
+    # do some stuff
+elif [ $command = 'update' ]; then
+    # do some stuff
+else
+    echo "Command $command not recognized."
+fi
+$$/code
+
+$$code(lang=make)
+installer: dependency1 dependency2 # And so on with the dependencies
+        # Some stuff
+
+update: dependency1 dependency2
+        # Some other stuff
+$$/code
+
+You tell me which one is better. I say having the framework already laid is miles better.
+
+## Modularity ##
+
+Almost all build shell scripts are modular -- e.g. what they do happens in discrete steps. At the most basic level, these three steps are setup, build, and cleanup. The build step is often comprised of several components as well. In a shell script, either you perform all three actions or none at all (unless you use the command branching strategy I outlined above, but we've already discussed why that's bad). However, Make is modular by nature -- because a Makefile, when used as intended, is comprised of small targets that combine to make larger, more general targets, it's incredibly simple to generate atomic portions of a build with no fussing around with your shell script. You simply have to specify the target that you want to build.
+
+## Make is smarter than you or your shell scripts ##
+
+On a large project, builds can take a long time. It's important to only build what you need to build, lest you waste valuable time and resources. Again, unless a shell script uses a branching strategy or a complex scheme to check when files were last modified (at which point you'd be writing a Make by hand, which is obviously unnecessary), you can't prevent a build shell script from doing unnecessary work. However, because Make understands the dependencies between your files and checks modified times for files to determine if any particular target needs to be rebuilt, it prevents any needless rebuilding of unchanged targets (with a well written Makefile, of course). Make is smarter and more general than you or your shell script, so you should take advantage of the potential time and resource savings.
+
+## DRY ##
+
+Make, although it probably predates DRY (Don't Repeat Yourself), epitomizes it. You're encouraged given plenty of tools to generalize targets so that you can build all similar targets with one target. You're encouraged to use variables, so that if a command or an option changes (e.g. you switch compilers, or want to use a different version of an interpreter), the changes only have to be made in one place. In fact, I'd go as far to say that in a well-written, general Makefile, any single change should only require modifications in one place.
+
+## Ease of use and standards ##
+
+It's also important to note that Make is something of a standard in software development, particularly among the C and Unix communities. Pick a few major C projects (e.g. Python, Ruby, OpenSSH), and see how many use Makefiles for building. That means that when people need to change your build procedure, they'll know where to look.
+
+Additionally, Make is a standard for users. Most somewhat-savvy users know that in order to install most software from source, you should run `make` and then `sudo make install`. That convenience is  tremendous boon to your user base.
+
+I'm not advocating conformism for conformity's sake, but conforming to standards dramatically increases your software's ease of use for both users and developers. Happy users become contributors and happy developers contribute more, and that's a good thing.
+
+## Automation ##
+
+Obviously, you can automate running of shell scripts as well, but there's a lot more that could go wrong than just automating a run of Make.
+
+## Conclusion and Disclaimer ##
+
+This post is not an argument for everyone to use Make. It's an argument for everyone to use a formal build system of some form with particular emphasis on the benefits of Make. Most of the stuff I praised Make for can also be said for Rake, Ant, Maven, or any other popular build system. My goal is to convert people away from shell scripts/manual building for any given project in favor of something that saves time and abstracts over a lot of the difficulties of writing shell scripts.

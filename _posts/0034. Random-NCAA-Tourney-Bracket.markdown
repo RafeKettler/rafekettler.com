@@ -1,0 +1,11 @@
+---
+title: Random NCAA Tourney Bracket, How Will it do?
+date: 2011/03/14 21:09:03
+tags: 
+categories: Sports
+---
+I love March Madness. I always pick several brackets, and this year is no exception.
+
+This year, as a control to compare my performance against as well as an experiment, I've created a completely random bracket. I entered the bracket alongside my others on [ESPN](http://games.espn.go.com/tcmen/en/). I used a TI-83 plus calculator to make the picks. You can see what I (or rather, the random number generator) chose [here](http://games.espn.go.com/tcmen/en/entry?entryID=2512524&print=false).
+
+UCLA wins in the end over Xavier, 89-77. The highest seed in the Final Four is Xavier (a 6 seed). Only one 1st seed makes it out of the first round, Duke (who falls to Texas in the Sweet Sixteen). Here's hoping that the real tourney is a bit more predictable.
