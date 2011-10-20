@@ -1,0 +1,7 @@
+---
+title: Host Switch
+date: 2011/10/20 16:00:00
+tags:
+categories: Hosting
+---
+I've switched hosting for this site from a hosting provider that shall not be named to Amazon S3. I switched because the server that my host had serving this site was compromised, and, in the process, all of my data was lost, and a few other bad things probably happened that I don't want to contemplate. If you're interesting in knowing how I got set up on S3, I used [a post from the AWS blog](http://aws.typepad.com/aws/2011/02/host-your-static-website-on-amazon-s3.html) and a rudimentary knowledge of how to alter DNS to get things set up. Here's hoping that there's not another [massive amount of downtime for AWS in the near future](http://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud#Issues).
