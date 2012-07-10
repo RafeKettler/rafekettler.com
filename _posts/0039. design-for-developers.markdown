@@ -1,0 +1,62 @@
+---
+title: Design for Developers
+date: 2012/7/10 17:00:00
+tags:
+categories: Software, Web development
+---
+
+![I have no idea what I'm doing. Really.](http://img.anongallery.org/img/4/1/i-have-no-idea-what-im-doing-dog.jpg)
+
+_**Disclaimer:** some of the things that I suggest in this post will make people who know better cringe. I'm not a designer and this post isn't intended for designers; it's intended for developers with little design aptitude and time who still want to produce decent-looking websites. Also, as a matter of warning to more design-savvy developers: this post is intended for the most design-oblivious of them all (specifically, people like me). Read ahead with caution._
+
+If you're like me, then you build a fair number of websites. If you're really like me, most of them look like complete and utter garbage. However, you're still a discerning consumer. You can tell why a site like [tumblr](https://www.tumblr.com/) looks good and a site like [craigslist](http://craigslist.org) does not. The answer to that specific questions might just be 15 years of improvements in web technology, but in a more general sense the difference is that a lot of effort clearly went into the design of tumblr while craigslist is almost entirely unstyled.
+
+As a discerning consumer of web design and as a producer of web sites, I take a lot of pride in my work and I'm always concerned about its quality. I know how to produce a good site from a technological perspective -- I can make sites that load fast, sip server resources, and scale well -- but I don't know much about making a site that's graphically appealing. Fortunately, quite a few people do and they've taken the time to share their work in a format that developers can use.
+
+Now, to the meat of the post: my goal here is to share some tools I've come across and used extensively to create websites that don't look terrible or antiquated. Without further adieu, here's the list:
+
+## [Twitter Bootstrap](http://twitter.github.com/bootstrap/index.html) (don't judge me just yet) ##
+
+This was a bold first pick. Bootstrap is controversial and a lot of designers hate it. I'm the first to admit: Bootstrap has made it too easy to put absolutely no effort into the design of your site, which has led to an army of sites that look like exact clones of its sample site:
+
+![Looks familiar, doesn't it?](http://twitter.github.com/bootstrap/assets/img/examples/bootstrap-example-hero.jpg)
+
+I'm here to tell you that, with some customization and willpower, Bootstrap can give you a lot of scaffolding to produce a modern-looking site without having to muck around with too much CSS. Here are a few things about Bootstrap that the developer in me loves:
+
+ - It prevents me from reinventing the wheel (I'm sorry, but no one should have to implement a CSS grid layout, ever. It's been done a million times before)
+ - It gives you modern-looking inputs and form controls that look more or less the same across different OSes and browsers
+ - It works on the major browsers
+ - It comes with a lot of sizing stuff built-in for text, form controls, buttons, etc.
+ - It provides a nice, clean typographical look that's a serious upgrade to anything's default (it's really just Arial, though)
+ - It's very well documented and maintained
+
+Bootstrap is the JQuery of CSS for me. It does a lot of stuff that I'd just end up writing on my own (except probably in a less-correct and portable way). It's the lazy (or productive, depending on how you want to spin it) programmer's best friend.
+
+Now, a few caveats:
+
+ - Please, for the love of God, do not use their fixed, black nav bar with light text. I can't even remember if it ever looked good, but today it's a cliché that will make pretty much anyone in the know lose respect for you. It's just incredibly overused.
+ - Don't use their default colors (more on how to pick these later). If I see another site with black nav on a white background with dark text and blue buttons (and lots of grey wells) I will kill a [pandawhale](http://pandawhale.com).
+
+In short, Bootstrap is great for prototyping and rapid development, and is a rock-solid foundation for the front-end design of a site. It is so overused, though, that one must be extremely deft when making use of it if they do not wish to anger the design gods.
+
+## [Adobe Kuler](http://kuler.adobe.com) ##
+
+I'm not actually sure what Kuler is intended to be. I think it's a color-theme sharing site for designers. I do certainly know what I use it for: I use it to pick colors that go together and make my sites look distinctive.
+
+I'll be honest: I don't know the least thing about color theory. I don't even know if knowing something about color theory would help me do what Kuler does for me. All I know is that when I see a group of colors together, I can tell if they look good. In that sense, Kuler plays to my strengths, by showing some vibrant and distinctive sets of colors that go well together and letting me pick. When I've chosen something that looks decent to me, I take each color's hex code and make a variable for it in my [SASS stylesheet](http://sass-lang.com/). Then, I chug away building a site that looks distinctive.
+
+_**Note:** this is how you should pick colors to customize your Bootstrap site._
+
+## [Subtle Patterns](http://subtlepatterns.com/) ##
+
+One of the habits of good-looking websites that I've noticed (perhaps only after being introduced to Subtle Patterns) is that a lot of them have subtle textures as background images. I have no sensible description for why this is, it just makes sites look better. Subtle Patterns is a collection of unobtrusive textures that you can use as background images for your site to immediately up its design panache.
+
+My workflow for Subtle Patterns is typically to look at every pattern I think might work and try it on the site. Once I've found something that looks good, I stick to it.
+
+## [Google Web Fonts](http://www.google.com/webfonts/) ##
+
+Web Fonts is basically a gallery of free fonts designed for the web. My process with this is similar to my Subtle Patterns process: go through fonts, find ones that look suitable, try them out, and pick which one's best.
+
+## Conclusion ##
+
+Use these tools with judgement and grace. Don't think you can replace a professional designer in any case -- there are some situations where you'll have to bite the bullet and hire someone. But, when you're just looking to make a decent-looking minimum viable product or building a personal project that you don't want to be ashamed of, these tools are perfect for you.

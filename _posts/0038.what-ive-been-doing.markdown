@@ -1,0 +1,31 @@
+---
+title: What I've Been Doing Since I Last Posted
+date: 2012/2/23 14:00:00
+tags:
+categories: Personal
+---
+It's been a pretty long time since I last posted on my blog. 4 months, in fact. I suppose I owe an explanation.
+
+## School
+
+I've been at school. [The University of Pennsylvania](http://en.wikipedia.org/wiki/University_of_Pennsylvania), to be exact. I've been studying CS, and I've been having a blast. However, school keeps me pretty busy both through coursework and related activities.
+
+I've been working hard to get requirements and prerequisites out of the way as well as do the introductory CS track that we have here. So far I've been doing well and enjoying it a lot. I liked one class, [CIS 120](http://www.seas.upenn.edu/~cis120/), so much last semester that I'm TAing it this semester. I think that the method that we're using to teach CS and programming to people with some, but not a lot, of exposure to programming paradigms and techniques is brilliant (that's likely the subject of another post).
+
+I've also been working on web dev for [the Daily Pennsylvanian](http://thedp.com), our independent student newspaper. I've transitioned a bit from writing code to managing people and designing whole applications, but I still get to do some development. It's been an interesting experience to take on more of a CTO role at a mid-sized corporation, though I'm not sure if it's something I could do for the rest of my life.
+
+## Work
+
+I've been working on and off at my old job from before I went to school. I think that, right now, I'd have to officially classify myself as no longer an employee, but I might return.
+
+I've added TAing this semester as a job, and I find that I enjoy that a lot, even though it doesn't pay very well. It's great to make an impact on developing CS students.
+
+Last, I'm looking for a summer internship. I've done interviews with some places that everyone has definitely heard of and with some places that no one has heard of. Some of them have gone well, some not so much. That's about as much detail as I can give now, I'll likely post when I've made a decision.
+
+## Side Projects
+
+This part makes me the saddest. I've really neglected a lot of the side projects that I used to work on before I went to school. I've resolved to start revisiting these projects (including my blog) in my spare time. The last thing I want to lose is my curiosity, and I'm terribly afraid that I'll get bored with CS. So I'm working to revisit my old projects.
+
+## Conclusion
+
+That's about it. Hopefully, my blog will return to its busy old state. Thanks for reading and thanks for sticking around.
