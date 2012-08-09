@@ -1,0 +1,86 @@
+---
+title: CORS and Rack Middleware
+date: 2012/8/9 09:00:00
+tags:
+categories: Software, Web development, Ruby, Rack, Javascript
+---
+I was facing an issue at work today. My Javascript needed to talk to a server. That'd be okay if that server weren't on another domain. Unfortunately, things weren't as simple as just using JQuery.
+
+### The Problem and the Solution ###
+
+I've met a decent number of people (mostly those with little experience with HTTP outside of web programming) who have been taught that cross domain requests from JS were not possible. Some more initiated folks are aware of the protocol that lets us turn on cross domain requests, but think that it requires a lot of effort. I, on the other hand, know that CORS (Cross Origin Resource Sharing) is incredibly easy (at a very basic level, it's one line in an Apache config file). I didn't want to take the easy approach, though. First, our resources were semi-private, so allowing all domains (that is, sending a header `Access-Control-Allow-Origin : *`) was out of the question. Second, we have people running development servers as well as testing and staging servers, so changing an Apache config file was not very scalable or convenient. This was particularly true because any non-standard ports had to be spelled out in the header.
+
+I decided to solve my problem with Rack middleware. We're using Rails, so I considered doing the following:
+
+$$code(lang=ruby)
+class ApplicationController < ActionController::Base
+  protect_from_forgery
+
+  before_filter :allow_cors
+
+  def allow_cors
+    response.headers['Access-Control-Allow-Origin'] = ALLOWED_DOMAINS
+  end
+
+  # ...
+end
+$$/code
+
+This seemed strange, though. I wasn't comfortable with the amount of overhead that this might incur, particularly since it would be called for every request. I also thought that something this low-level and unrelated to the application logic didn't really belong in my controllers. So I decided to build some Rack middleware instead.
+
+### Rack Middleware ###
+
+Rack is fairly poorly documented, unfortunately. The API and conventions for writing middleware are no exception to this, and there is very little formal documentation on how to do anything nontrivial with Rack middleware. Fortunately, there is [a Github repo, rack-contrib](https://github.com/rack/rack-contrib/tree/master/lib/rack/contrib), that is full of real world Rack middlewares. I read the (very readable) source for a few of those examples and knew exactly what to do. This is what I came up with:
+
+First, `lib/cors_middleware.rb`:
+
+$$code(lang=ruby)
+# Add Access-Control-Allow-Origin headers to every request
+class CorsMiddleware
+  def initialize(app, config_file)
+    @@allowed_domains ||= YAML.load_file(config_file)
+    @app = app
+  end
+
+  def call(env)
+    status, headers, body = @app.call(env)
+    # Check our list of patterns and see if any match our Origin header.
+    # If so, set Access-Control-Allow-Origin to the request's Origin
+    origin = env['HTTP_ORIGIN']
+    if origin && @@allowed_domains.any? { |pattern| File.fnmatch?(pattern, origin) }
+      headers['Access-Control-Allow-Origin'] = origin
+    end
+    [status, headers, body]
+  end
+end
+$$/code
+
+Then, `config/cors.yml`:
+
+$$code(lang=yaml)
+# Allowed domains for CORS. Shell style globbing is supported.
+ - http://localhost:*
+$$/code
+
+And `config/application.rb`:
+
+$$code(lang=ruby)
+require 'rails/all'
+require_relative '../lib/cors_middleware'
+
+# ...
+
+config.middleware.use CorsMiddleware, "#{Rails.root}/config/cors.yml"
+$$/code
+
+I restarted the server and everything worked magnificently.
+
+### A Few Final Notes ###
+
+Some final notes because I found these things to be poorly documented on the internet:
+
+ - The header `Access-Control-Allow-Origin` _does not_ support any form of globbing except a single wildcard (to allow all domains). This is very unfortunate, but can be solved with some simple code (like my `File.fnmatch` calls earlier). Remember, `*` is the only valid value with a star in it.
+ - Rack HTTP request headers are kept in the `env` hash but are all mangled so that everything is all caps and hyphens become underscores. For example, the header `Content-Type` is `env['HTTP_CONTENT_TYPE']`.
+ - CORS is incredibly easy to implement and everyone exposing public APIs that don't require authentication for some or all of the data should enable it
+ - Rack is a very powerful and efficient tool for doing low-level things with HTTP in any Ruby web app (particularly in Rails where everything seems to have a good bit of overhead)
+ - The lack of examples in IETF/W3C's RFCs is incredibly frustating. Yes, I can read Backus-Naur form but I'd rather not when I could just have the behavior I want modeled, particularly when your BNF is loaded with random escape sequences to the point where I can't tell if it is intentional or not.

@@ -27,7 +27,7 @@ I'm here to tell you that, with some customization and willpower, Bootstrap can 
  - It gives you modern-looking inputs and form controls that look more or less the same across different OSes and browsers
  - It works on the major browsers
  - It comes with a lot of sizing stuff built-in for text, form controls, buttons, etc.
- - It provides a nice, clean typographical look that's a serious upgrade to anything's default (it's really just Arial, though)
+ - It provides a nice, clean typographical look that's a serious upgrade to anything's default
  - It's very well documented and maintained
 
 Bootstrap is the JQuery of CSS for me. It does a lot of stuff that I'd just end up writing on my own (except probably in a less-correct and portable way). It's the lazy (or productive, depending on how you want to spin it) programmer's best friend.
